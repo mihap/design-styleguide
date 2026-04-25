@@ -89,7 +89,7 @@ font-family: "[Primary monospace]", "[Secondary monospace]", [UI mono fallback],
 
 ---
 
-## Typography Best Practices
+## Typography Do's and Don'ts
 
 ### ✓ Do
 

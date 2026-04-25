@@ -2,7 +2,7 @@
 
 [Theme Name] · [Mode — e.g. Light / Dark] · Version [X.Y]
 
-[Short paragraph introducing the document — what it covers (color usage, typography, spacing, component states, best practices) and who it is for.]
+[Short paragraph introducing the document — what it covers (color usage, typography, spacing, component states) and who it is for.]
 
 | Field         | Value                                            |
 |---------------|--------------------------------------------------|
