@@ -1,5 +1,9 @@
 # 9. Buttons
 
+[Opening paragraph — describe how button styling communicates action priority, tappability, and emphasis across the system.]
+
+---
+
 ## Button Variants
 
 | Variant     | Background    | Text          | Border             | Usage                          |
@@ -17,20 +21,20 @@
 
 | Size | Height | Padding          | Font Size | Icon Size | Usage                  |
 |------|--------|------------------|-----------|-----------|------------------------|
-| xs   | [rem]   | [py rem, px rem]       | [rem]      | [rem]      | [Usage]                |
-| sm   | [rem]   | [py rem, px rem]       | [rem]      | [rem]      | [Usage]                |
-| md   | [rem]   | [py rem, px rem]       | [rem]      | [rem]      | [Usage]                |
-| lg   | [rem]   | [py rem, px rem]       | [rem]      | [rem]      | [Usage]                |
+| xs   | [rem]   | [padding rule]         | [rem]      | [rem]      | [Usage]                |
+| sm   | [rem]   | [padding rule]         | [rem]      | [rem]      | [Usage]                |
+| md   | [rem]   | [padding rule]         | [rem]      | [rem]      | [Usage]                |
+| lg   | [rem]   | [padding rule]         | [rem]      | [rem]      | [Usage]                |
 
 ---
 
 ## Button with Icons
 
-| Pattern     | Icon Position   | Gap              | Example                 |
+| Pattern     | Icon Placement  | Gap              | Usage Example           |
 |-------------|-----------------|------------------|-------------------------|
-| Icon + Text | [position]      | [rem (utility)]   | [example labels]        |
-| Text + Icon | [position]      | [rem (utility)]   | [example labels]        |
-| Icon only   | [position]      | [gap rule]       | [example labels]        |
+| Icon + Text | [placement rule] | [rem (utility)]  | [example labels]        |
+| Text + Icon | [placement rule] | [rem (utility)]  | [example labels]        |
+| Icon only   | [placement rule] | [gap rule]       | [example labels]        |
 
 ---
 
@@ -38,29 +42,7 @@
 
 | Size | Dimensions      | Icon Size  | Padding |
 |------|-----------------|------------|---------|
-| xs   | [rem × rem]       | [rem]       | [rem]    |
-| sm   | [rem × rem]       | [rem]       | [rem]    |
-| md   | [rem × rem]       | [rem]       | [rem]    |
-| lg   | [rem × rem]       | [rem]       | [rem]    |
-
----
-
-## Button Usage Guidelines
-
-### ✓ Do
-
-- [Rule — primary buttons per view / section]
-- [Rule — primary action placement in button groups]
-- [Rule — label copy style (verb-first)]
-- [Rule — button height consistency within a row]
-- [Rule — loading states for async actions]
-- [Rule — disabled state conditions]
-
-### ✗ Don't
-
-- [Rule — multiple primary buttons competing]
-- [Rule — vague labels]
-- [Rule — all-caps treatment]
-- [Rule — mixing button sizes in same row]
-- [Rule — buttons used for navigation]
-- [Rule — destructive button placement]
+| xs   | [rem × rem]     | [rem]      | [padding rule] |
+| sm   | [rem × rem]     | [rem]      | [padding rule] |
+| md   | [rem × rem]     | [rem]      | [padding rule] |
+| lg   | [rem × rem]     | [rem]      | [padding rule] |

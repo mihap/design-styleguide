@@ -1,6 +1,6 @@
-# 4. Spacing System
+# 4. Layout & Spacing
 
-[Opening paragraph — describe the base unit and the rule that all spacing values are multiples of it for consistent alignment.]
+[Opening paragraph — describe the base unit and the rule that all spacing values are multiples of it for consistent alignment across components, surfaces, and page layout.]
 
 ---
 
@@ -27,24 +27,35 @@
 
 ---
 
-## Component Spacing Reference
+## Applied Spacing Reference
+
+[One-line — map the spacing scale into recurring component, surface, and page-layout decisions.]
 
 ### Button Padding
 
 | Size          | Padding Y | Padding X | Height | Font Size |
 |---------------|-----------|-----------|--------|-----------|
-| xs            | [rem]      | [rem]      | [rem]   | [rem]      |
-| sm            | [rem]      | [rem]      | [rem]   | [rem]      |
-| md (default)  | [rem]      | [rem]      | [rem]   | [rem]      |
-| lg            | [rem]      | [rem]      | [rem]   | [rem]      |
+| xs            | [rem (token)] | [rem (token)] | [rem (token)] | [rem (token)] |
+| sm            | [rem (token)] | [rem (token)] | [rem (token)] | [rem (token)] |
+| md (default)  | [rem (token)] | [rem (token)] | [rem (token)] | [rem (token)] |
+| lg            | [rem (token)] | [rem (token)] | [rem (token)] | [rem (token)] |
 
 ### Input Field Spacing
 
 | Size          | Padding Y | Padding X | Height | Font Size |
 |---------------|-----------|-----------|--------|-----------|
-| sm            | [rem]      | [rem]      | [rem]   | [rem]      |
-| md (default)  | [rem]      | [rem]      | [rem]   | [rem]      |
-| lg            | [rem]      | [rem]      | [rem]   | [rem]      |
+| sm            | [rem (token)] | [rem (token)] | [rem (token)] | [rem (token)] |
+| md (default)  | [rem (token)] | [rem (token)] | [rem (token)] | [rem (token)] |
+| lg            | [rem (token)] | [rem (token)] | [rem (token)] | [rem (token)] |
+
+### Surface Padding
+
+| Surface             | Padding          | Gap (internal)    | Usage              |
+|---------------------|------------------|-------------------|--------------------|
+| Dropdown / popover  | [rem (utility)]  | [rem (utility)]   | [Usage]            |
+| Modal content       | [rem (utility)]  | [rem (utility)]   | [Usage]            |
+| Drawer / sidebar    | [rem (utility)]  | [rem (utility)]   | [Usage]            |
+| Page section block  | [rem (utility)]  | [rem (utility)]   | [Usage]            |
 
 ### Card Spacing
 
@@ -59,11 +70,13 @@
 
 | Context                         | Value             | Notes                              |
 |---------------------------------|-------------------|------------------------------------|
-| Page margin (mobile)            | [rem]              | [Notes]                            |
-| Page margin (tablet)            | [rem]              | [Notes]                            |
-| Page margin (desktop)           | [rem or container] | [Notes]                            |
-| Max content width               | [rem]              | [Notes]                            |
-| Section gap                     | [rem range]        | [Notes]                            |
-| Component gap (within section)  | [rem range]        | [Notes]                            |
-| Form field gap                  | [rem range]        | [Notes]                            |
-| Inline gap (buttons, badges)    | [rem range]        | [Notes]                            |
+| Page margin (mobile)            | [rem (token)]      | [Notes]                            |
+| Page margin (tablet)            | [rem (token)]      | [Notes]                            |
+| Page margin (desktop)           | [container rule]   | [Notes]                            |
+| Max content width               | [rem (token)]      | [Notes]                            |
+| Grid column gap                 | [rem (token)]      | [Notes]                            |
+| Grid row gap                    | [rem (token)]      | [Notes]                            |
+| Section gap                     | [rem (token)]      | [Notes]                            |
+| Component gap (within section)  | [rem (token)]      | [Notes]                            |
+| Form field gap                  | [rem (token)]      | [Notes]                            |
+| Inline gap (buttons, badges)    | [rem (token)]      | [Notes]                            |

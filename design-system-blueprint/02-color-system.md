@@ -1,6 +1,6 @@
 # 2. Color System
 
-[Opening paragraph — describe the color space used (e.g. HEX / RGB / HSL / OKLCH) and how colors are delivered (e.g. CSS custom properties, tokens) for theming and consistency.]
+[Opening paragraph — describe the color system’s roles, the color space used (e.g. HEX / RGB / HSL / OKLCH), and how tokens are delivered for theming and consistency.]
 
 ---
 
@@ -85,9 +85,9 @@
 
 | Context                         | Color          | Width   |
 |---------------------------------|----------------|---------|
-| Default borders (cards, inputs) | [color token]  | [rem]    |
-| Subtle dividers                 | [color token]  | [rem]    |
-| Strong dividers (sections)      | [color token]  | [rem]    |
-| Focus rings                     | [color token]  | [rem]    |
-| Error borders                   | [color token]  | [rem]    |
-| Success borders                 | [color token]  | [rem]    |
+| Default borders (cards, inputs) | [color token]  | [px]    |
+| Subtle dividers                 | [color token]  | [px]    |
+| Strong dividers (sections)      | [color token]  | [px]    |
+| Focus rings                     | [color token]  | [px]    |
+| Error borders                   | [color token]  | [px]    |
+| Success borders                 | [color token]  | [px]    |

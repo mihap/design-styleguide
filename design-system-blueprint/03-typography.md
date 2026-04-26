@@ -51,7 +51,7 @@ font-family: "[Primary monospace]", "[Secondary monospace]", [UI mono fallback],
 
 [One-line — describe how line height affects readability and the chosen stance.]
 
-| Category | Line Height  | Tailwind          | When to Use                           |
+| Category | Line Height  | Tailwind          | Usage                                 |
 |----------|--------------|-------------------|---------------------------------------|
 | Tight    | [unitless]   | [utility class]   | [Usage]                               |
 | Snug     | [unitless]   | [utility class]   | [Usage]                               |
@@ -86,25 +86,3 @@ font-family: "[Primary monospace]", "[Secondary monospace]", [UI mono fallback],
 | Paragraph  | [rem (utility)]    | [Notes]                           |
 | List       | [rem (utility)]    | [Notes]                           |
 | List item  | [rem (utility)]    | [Notes]                           |
-
----
-
-## Typography Do's and Don'ts
-
-### ✓ Do
-
-- [Do rule — default body text size]
-- [Do rule — max line length / measure]
-- [Do rule — weight for buttons / interactive labels]
-- [Do rule — letter-spacing for all-caps text]
-- [Do rule — tabular figures for data / numbers]
-- [Do rule — heading hierarchy consistency]
-
-### ✗ Don't
-
-- [Don't rule — heavy weights policy]
-- [Don't rule — italics for emphasis policy]
-- [Don't rule — body alignment policy]
-- [Don't rule — mixing font sizes within a component]
-- [Don't rule — mixing typefaces / sans-serifs]
-- [Don't rule — decorative or script fonts]

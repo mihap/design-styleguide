@@ -1,6 +1,6 @@
 # 7. Component States
 
-[Opening paragraph — importance of clearly communicating state to users for usability and accessibility.]
+[Opening paragraph — describe how the system communicates interaction, availability, and status through explicit component states.]
 
 ---
 
@@ -22,10 +22,10 @@
 
 ## Primary Button States
 
-| State     | Background       | Text         | Border    | Other                          |
+| State     | Background       | Text         | Border    | Notes                          |
 |-----------|------------------|--------------|-----------|--------------------------------|
-| Default   | [token]          | [token]      | [token]   | [notes]                        |
-| Hover     | [token / shift]  | [token]      | [token]   | [notes]                        |
+| Default   | [token]          | [token]      | [token]   | [Notes]                        |
+| Hover     | [token / shift]  | [token]      | [token]   | [Notes]                        |
 | Focus     | [token]          | [token]      | [token]   | [focus ring spec]              |
 | Active    | [token / shift]  | [token]      | [token]   | [transform]                    |
 | Disabled  | [token / opacity]| [token / op] | [token]   | [cursor rule]                  |
@@ -35,10 +35,10 @@
 
 ## Secondary / Outline Button States
 
-| State     | Background    | Text          | Border            | Other             |
+| State     | Background    | Text          | Border            | Notes             |
 |-----------|---------------|---------------|-------------------|-------------------|
-| Default   | [token]       | [token]       | [token / width]   | [notes]           |
-| Hover     | [token]       | [token]       | [token / width]   | [notes]           |
+| Default   | [token]       | [token]       | [token / width]   | [Notes]           |
+| Hover     | [token]       | [token]       | [token / width]   | [Notes]           |
 | Focus     | [token]       | [token]       | [token / width]   | [focus ring spec] |
 | Active    | [token]       | [token]       | [token / width]   | [transform]       |
 | Disabled  | [token]       | [token / op]  | [token / op]      | [cursor rule]     |
@@ -47,17 +47,17 @@
 
 ## Input Field States
 
-| State        | Background    | Border            | Text          | Other                        |
+| State        | Background    | Border            | Text          | Notes                        |
 |--------------|---------------|-------------------|---------------|------------------------------|
-| Default      | [token]       | [token / width]   | [token]       | [notes]                      |
-| Placeholder  | [token]       | [token / width]   | [token]       | [notes]                      |
-| Hover        | [token]       | [token / width]   | [token]       | [notes]                      |
+| Default      | [token]       | [token / width]   | [token]       | [Notes]                      |
+| Placeholder  | [token]       | [token / width]   | [token]       | [Notes]                      |
+| Hover        | [token]       | [token / width]   | [token]       | [Notes]                      |
 | Focus        | [token]       | [token / width]   | [token]       | [focus ring + glow spec]     |
-| Filled       | [token]       | [token / width]   | [token]       | [notes]                      |
+| Filled       | [token]       | [token / width]   | [token]       | [Notes]                      |
 | Disabled     | [token]       | [token / width]   | [token]       | [cursor rule]                |
-| Read-only    | [token]       | [token / width]   | [token]       | [notes]                      |
-| Error        | [token]       | [token / width]   | [token]       | [notes]                      |
-| Success      | [token]       | [token / width]   | [token]       | [notes]                      |
+| Read-only    | [token]       | [token / width]   | [token]       | [Notes]                      |
+| Error        | [token]       | [token / width]   | [token]       | [Notes]                      |
+| Success      | [token]       | [token / width]   | [token]       | [Notes]                      |
 
 ---
 
@@ -68,8 +68,8 @@
 | Property            | Value         | CSS                     |
 |---------------------|---------------|-------------------------|
 | Ring color          | [token]       | [utility]               |
-| Ring width          | [rem]          | [utility]               |
-| Ring offset         | [rem]          | [utility]               |
+| Ring width          | [px]           | [utility]               |
+| Ring offset         | [px]           | [utility]               |
 | Ring offset color   | [token]       | [utility]               |
 | Transition          | [ms ease]     | [utility]               |
 

@@ -1,8 +1,12 @@
-# 10. Feedback & Alerts
+# 12. Feedback & Alerts
+
+[Opening paragraph — describe how alerts, toasts, and badges keep feedback timely, local, and easy to act on without interrupting the interface hierarchy.]
+
+---
 
 ## Alert Variants
 
-| Type    | Background    | Border          | Icon           | Usage                            |
+| Variant | Background    | Border          | Icon           | Usage                            |
 |---------|---------------|-----------------|----------------|----------------------------------|
 | Info    | [token]       | [token / width] | [icon name]    | [Usage]                          |
 | Success | [token]       | [token / width] | [icon name]    | [Usage]                          |
@@ -19,10 +23,10 @@
 | Container padding  | [rem (utility)]          | [Notes]                           |
 | Icon size          | [rem]                    | [Notes]                           |
 | Icon-to-text gap   | [rem (utility)]          | [Notes]                           |
-| Title font         | [rem, weight]            | [Notes]                           |
-| Body font          | [rem, weight]            | [Notes]                           |
+| Title font         | [rem (utility) + weight] | [Notes]                           |
+| Body font          | [rem (utility) + weight] | [Notes]                           |
 | Border radius      | [rem (utility)]          | [Notes]                           |
-| Dismiss button     | [size, style]           | [Notes]                           |
+| Dismiss button     | [size + placement rule] | [Notes]                           |
 
 ---
 
@@ -30,12 +34,12 @@
 
 | Property       | Value                  | Notes                             |
 |----------------|------------------------|-----------------------------------|
-| Position       | [position]             | [Notes]                           |
+| Placement      | [placement rule]       | [Notes]                           |
 | Max width      | [rem]                   | [Notes]                           |
-| Padding        | [py rem, px rem]                | [Notes]                           |
+| Padding        | [padding rule]          | [Notes]                           |
 | Shadow         | [utility]              | [Notes]                           |
 | Border radius  | [rem (utility)]         | [Notes]                           |
-| Auto-dismiss   | [duration]             | [Notes]                           |
+| Auto-dismiss   | [duration rule]        | [Notes]                           |
 | Stack gap      | [rem]                   | [Notes]                           |
 | Animation      | [enter animation]      | [Notes]                           |
 
@@ -43,12 +47,12 @@
 
 ## Badge Styles
 
-| Variant   | Background     | Text          | Use Case                  |
+| Variant   | Background     | Text          | Usage                     |
 |-----------|----------------|---------------|---------------------------|
-| Default   | [token]        | [token]       | [Use case]                |
-| Primary   | [token]        | [token]       | [Use case]                |
-| Secondary | [token]        | [token]       | [Use case]                |
-| Success   | [token]        | [token]       | [Use case]                |
-| Warning   | [token]        | [token]       | [Use case]                |
-| Error     | [token]        | [token]       | [Use case]                |
-| Outline   | [token]        | [token]       | [Use case]                |
+| Default   | [token]        | [token]       | [Usage]                   |
+| Primary   | [token]        | [token]       | [Usage]                   |
+| Secondary | [token]        | [token]       | [Usage]                   |
+| Success   | [token]        | [token]       | [Usage]                   |
+| Warning   | [token]        | [token]       | [Usage]                   |
+| Error     | [token]        | [token]       | [Usage]                   |
+| Outline   | [token]        | [token]       | [Usage]                   |

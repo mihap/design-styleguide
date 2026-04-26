@@ -1,4 +1,4 @@
-# 12. Quick Reference
+# 13. Quick Reference
 
 ## Theme Variables
 
@@ -30,7 +30,7 @@
   --radius-box: [rem];
   --size-selector: [rem];
   --size-field: [rem];
-  --border: [rem];
+  --border: [px];
   --depth: [number];
   --noise: [number];
 }
@@ -43,16 +43,25 @@
 | Name         | HEX     | OKLCH       | Tailwind                |
 |--------------|---------|-------------|-------------------------|
 | Primary      | [hex]   | [oklch]     | [utility classes]       |
+| Primary Content | [hex] | [oklch]     | [utility classes]       |
 | Secondary    | [hex]   | [oklch]     | [utility classes]       |
+| Secondary Content | [hex] | [oklch]   | [utility classes]       |
 | Accent       | [hex]   | [oklch]     | [utility classes]       |
+| Accent Content | [hex] | [oklch]     | [utility classes]       |
+| Neutral      | [hex]   | [oklch]     | [utility classes]       |
+| Neutral Content | [hex] | [oklch]     | [utility classes]       |
 | Base 100     | [hex]   | [oklch]     | [utility classes]       |
 | Base 200     | [hex]   | [oklch]     | [utility classes]       |
 | Base 300     | [hex]   | [oklch]     | [utility classes]       |
 | Base Content | [hex]   | [oklch]     | [utility classes]       |
 | Info         | [hex]   | [oklch]     | [utility classes]       |
+| Info Content | [hex]   | [oklch]     | [utility classes]       |
 | Success      | [hex]   | [oklch]     | [utility classes]       |
+| Success Content | [hex] | [oklch]     | [utility classes]       |
 | Warning      | [hex]   | [oklch]     | [utility classes]       |
+| Warning Content | [hex] | [oklch]     | [utility classes]       |
 | Error        | [hex]   | [oklch]     | [utility classes]       |
+| Error Content | [hex]  | [oklch]     | [utility classes]       |
 
 ---
 
@@ -60,15 +69,16 @@
 
 | Element    | Size  | Weight   | Line Height  | Tailwind             |
 |------------|-------|----------|--------------|----------------------|
+| Display    | [rem]  | [weight] | [unitless]   | [utility classes]    |
 | H1         | [rem]  | [weight] | [unitless]   | [utility classes]    |
 | H2         | [rem]  | [weight] | [unitless]   | [utility classes]    |
 | H3         | [rem]  | [weight] | [unitless]   | [utility classes]    |
 | H4         | [rem]  | [weight] | [unitless]   | [utility classes]    |
-| Body       | [rem]  | [weight] | [unitless]   | [utility classes]    |
+| H5         | [rem]  | [weight] | [unitless]   | [utility classes]    |
 | Body Large | [rem]  | [weight] | [unitless]   | [utility classes]    |
+| Body       | [rem]  | [weight] | [unitless]   | [utility classes]    |
 | Small      | [rem]  | [weight] | [unitless]   | [utility classes]    |
-| Label      | [rem]  | [weight] | [unitless]   | [utility classes]    |
-| Button     | [rem]  | [weight] | [unitless]   | [utility classes]    |
+| Tiny       | [rem]  | [weight] | [unitless]   | [utility classes]    |
 
 ---
 
