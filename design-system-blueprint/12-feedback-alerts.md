@@ -6,6 +6,8 @@
 
 ## Alert Variants
 
+Info, Success, Warning, and Error draw from the Semantic Colors in §02. Neutral draws from the Neutral palette in §02 and is a non-status variant for ambient announcements.
+
 | Variant | Background    | Border          | Icon           | Usage                            |
 |---------|---------------|-----------------|----------------|----------------------------------|
 | Info    | [token]       | [token / width] | [icon name]    | [Usage]                          |

@@ -32,18 +32,18 @@ font-family: "[Primary monospace]", "[Secondary monospace]", [UI mono fallback],
 
 [One-line — describe modular progression, ratio, and line-height strategy.]
 
-| Name       | Size   | Line Height   | Tailwind          | Usage                          |
-|------------|--------|---------------|-------------------|--------------------------------|
-| Display    | [rem]   | [unitless]    | [utility class]   | [Usage]                        |
-| H1         | [rem]   | [unitless]    | [utility class]   | [Usage]                        |
-| H2         | [rem]   | [unitless]    | [utility class]   | [Usage]                        |
-| H3         | [rem]   | [unitless]    | [utility class]   | [Usage]                        |
-| H4         | [rem]   | [unitless]    | [utility class]   | [Usage]                        |
-| H5         | [rem]   | [unitless]    | [utility class]   | [Usage]                        |
-| Body Large | [rem]   | [unitless]    | [utility class]   | [Usage]                        |
-| Body       | [rem]   | [unitless]    | [utility class]   | [Usage]                        |
-| Small      | [rem]   | [unitless]    | [utility class]   | [Usage]                        |
-| Tiny       | [rem]   | [unitless]    | [utility class]   | [Usage]                        |
+| Name       | Size   | Weight    | Line Height   | Tailwind          | Usage                          |
+|------------|--------|-----------|---------------|-------------------|--------------------------------|
+| Display    | [rem]   | [weight]  | [unitless]    | [utility class]   | [Usage]                        |
+| H1         | [rem]   | [weight]  | [unitless]    | [utility class]   | [Usage]                        |
+| H2         | [rem]   | [weight]  | [unitless]    | [utility class]   | [Usage]                        |
+| H3         | [rem]   | [weight]  | [unitless]    | [utility class]   | [Usage]                        |
+| H4         | [rem]   | [weight]  | [unitless]    | [utility class]   | [Usage]                        |
+| H5         | [rem]   | [weight]  | [unitless]    | [utility class]   | [Usage]                        |
+| Body Large | [rem]   | [weight]  | [unitless]    | [utility class]   | [Usage]                        |
+| Body       | [rem]   | [weight]  | [unitless]    | [utility class]   | [Usage]                        |
+| Small      | [rem]   | [weight]  | [unitless]    | [utility class]   | [Usage]                        |
+| Tiny       | [rem]   | [weight]  | [unitless]    | [utility class]   | [Usage]                        |
 
 ---
 

@@ -8,7 +8,7 @@ Use this appendix to decide how rounded each component family should feel. It co
 
 ### Border Radius Scale
 
-- Rule: Keep radius subtle and consistent so corners support grouping instead of becoming decoration.
+- Rule: Use one shared radius scale across the system, allow only adjacent-step changes between related components on the same surface, and reserve full-round (pill, avatar) for explicitly approved exceptions.
 - Use it when: you define the shared corner scale for fields, buttons, cards, popovers, and larger surfaces.
 - Check: rounded corners reinforce the system style without calling more attention than spacing or color.
 

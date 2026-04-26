@@ -26,7 +26,7 @@ Use this appendix to keep navigation readable, low-clutter, and easy to follow u
 
 ### Responsive Navigation Behavior
 
-- Rule: When space gets tight, trim non-crucial navigation details before sacrificing legibility or tap accuracy.
+- Rule: When space gets tight, trim in this order — decorative icons, secondary metadata, then overflow chevrons — before shrinking labels or reducing tap targets. Preserve current location, primary destinations, and minimum tap accuracy at every breakpoint.
 - Use it when: the same navigation pattern must work across mobile, tablet, and desktop widths.
 - Check: compact navigation still tells users where they are and what they can do next.
 

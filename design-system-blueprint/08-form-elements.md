@@ -64,7 +64,7 @@
 |--------------------|-------------------------------------|-----------------------|----------------------------|--------------------------------|
 | Checkbox           | [box + label arrangement]           | [placement rule]      | [size / target rule]       | [Notes]                        |
 | Radio              | [dot + label arrangement]           | [placement rule]      | [size / target rule]       | [Notes]                        |
-| Switch / toggle    | [track + thumb arrangement]         | [placement rule]      | [size / target rule]       | [Notes]                        |
+| Toggle / Switch    | [track + thumb arrangement]         | [placement rule]      | [size / target rule]       | [Notes]                        |
 | Choice chip        | [chip anatomy]                      | [placement rule]      | [padding / height rule]    | [Notes]                        |
 | Segmented control  | [segment grouping]                  | [placement rule]      | [height / padding rule]    | [Notes]                        |
 

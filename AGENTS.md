@@ -69,6 +69,7 @@ Rename the `Tailwind` column header (to `Class`, `Token`, `Variable`, etc.). Don
 | Keep prose to one short sentence per cell.                                                      | The blueprint's value is scannability.                             |
 | Use `rem` for sizes, `px` for border/ring/divider widths, unitless for line height, `em` for letter spacing, `ms` for transitions. | Consistency with Tailwind's conventions.                           |
 | Don't add or remove files in `design-system-blueprint/` without explicit instruction.           | The numbered blueprint structure is the contract.                  |
+| Filename slug and chapter title may differ; the slug is a stable internal anchor, the title is the human-facing heading. | E.g. `04-spacing-system.md` slug ↔ "Layout & Spacing" title.       |
 
 ---
 
@@ -82,7 +83,7 @@ When you change anything, check these still hold:
    - `09-buttons.md`, `10-navigation.md`, `11-tables-data-display.md`, `12-feedback-alerts.md` where those chapters reference color-driven treatments.
 2. **Type scale** in `03-typography.md` must match the Typography Quick Reference in `13-quick-reference.md`.
 3. **Radius scale** in `05-border-radius.md` must match `--radius-*` declarations in `13-quick-reference.md`.
-4. **Spacing tokens** in `04-spacing-system.md` are the only legal values referenced in `08-form-elements.md`, `09-buttons.md`, `10-navigation.md`, `11-tables-data-display.md`, and `12-feedback-alerts.md`. No raw rem values that aren't on the spacing scale.
+4. **Scale-typed values**: spacing values referenced in `08-form-elements.md`, `09-buttons.md`, `10-navigation.md`, `11-tables-data-display.md`, and `12-feedback-alerts.md` must come from `04-spacing-system.md`; typography values (size, weight, line height) must come from `03-typography.md`; icon sizes must come from a declared icon scale; color tokens must come from `02-color-system.md`. No raw rem values outside the declared scales.
 5. **Philosophy constraints** in `01-design-philosophy.md` should not be contradicted later. If §01 says "borders, not shadows", §06 should default to borders for elevation.
 6. **Shared interaction treatment** should stay consistent across `07-component-states.md`, `09-buttons.md`, `10-navigation.md`, and `11-tables-data-display.md`. If focus, active, or selected behavior changes in one, sweep the others.
 7. **Cover metadata** in `00-cover.md` (theme name, font, framework, color format) must match what the rest of the document actually uses.

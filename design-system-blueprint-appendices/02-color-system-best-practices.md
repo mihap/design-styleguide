@@ -34,7 +34,7 @@ Use this appendix to turn color tokens into a readable hierarchy. It covers emph
 
 - Rule: Treat contrast checks as part of token definition, not as post-design cleanup.
 - Use it when: you finalize text, border, fill, and state combinations.
-- Check: every essential pairing meets your chosen accessibility threshold before release.
+- Check: every essential pairing meets WCAG 2.1 AA contrast (4.5:1 for body text, 3:1 for UI text and large text) before release; apply stronger thresholds for focus indicators and critical messaging.
 
 ## DO
 

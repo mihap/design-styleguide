@@ -19,12 +19,14 @@
 
 ## Button Sizes
 
-| Size | Height | Padding          | Font Size | Icon Size | Usage                  |
-|------|--------|------------------|-----------|-----------|------------------------|
-| xs   | [rem]   | [padding rule]         | [rem]      | [rem]      | [Usage]                |
-| sm   | [rem]   | [padding rule]         | [rem]      | [rem]      | [Usage]                |
-| md   | [rem]   | [padding rule]         | [rem]      | [rem]      | [Usage]                |
-| lg   | [rem]   | [padding rule]         | [rem]      | [rem]      | [Usage]                |
+Geometry (height, padding, font size) is defined in §04 Layout & Spacing → Button Padding. This section adds icon sizing and per-size usage guidance.
+
+| Size         | Icon Size | Usage                  |
+|--------------|-----------|------------------------|
+| xs           | [rem]     | [Usage]                |
+| sm           | [rem]     | [Usage]                |
+| md (default) | [rem]     | [Usage]                |
+| lg           | [rem]     | [Usage]                |
 
 ---
 

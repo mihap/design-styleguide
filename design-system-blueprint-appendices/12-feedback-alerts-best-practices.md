@@ -14,7 +14,7 @@ Use this appendix to make feedback timely, local, and easy to act on. It covers 
 
 ### Alert Anatomy
 
-- Rule: Keep feedback close to the affected action or field.
+- Rule: Place feedback at the scope of its cause — field errors directly adjacent to the field; form errors at the form boundary with anchor links to each invalid field; row-level feedback inline in the row; toasts reserved for non-blocking, global confirmation.
 - Use it when: a validation, save action, destructive step, or inline process needs explanation.
 - Check: users do not have to search another part of the screen to connect the message to its cause.
 

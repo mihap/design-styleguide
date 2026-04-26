@@ -6,7 +6,7 @@
 
 ## Border Radius Scale
 
-| Token   | Value   | Tailwind          | DaisyUI Variable     | Usage                               |
+| Token   | Value   | Tailwind          | CSS Variable         | Usage                               |
 |---------|---------|-------------------|----------------------|-------------------------------------|
 | none    | [rem]    | [utility]         | [--variable or —]    | [Usage]                             |
 | sm      | [rem]    | [utility]         | [--variable or —]    | [Usage]                             |

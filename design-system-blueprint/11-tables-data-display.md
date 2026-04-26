@@ -22,6 +22,8 @@
 
 ## Density & Spacing
 
+Tables cap at Comfortable density to keep scanning fast under data load; reserve `Spacious` (defined for cards in §04) for surfaces that prioritize visual breathing room over scanability.
+
 | Density       | Row Height   | Cell Padding X     | Cell Padding Y     | Usage                          |
 |---------------|--------------|--------------------|--------------------|--------------------------------|
 | Compact       | [rem (token)] | [rem (utility)]   | [rem (utility)]    | [Usage]                        |

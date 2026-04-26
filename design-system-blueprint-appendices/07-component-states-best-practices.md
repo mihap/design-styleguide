@@ -32,7 +32,7 @@ Use this appendix to define how components communicate interaction, availability
 
 ### Focus Ring Specifications
 
-- Rule: Keep focus treatment visible enough for keyboard use even when the rest of the component styling stays restrained.
+- Rule: Use a focus ring of at least 2px with a visible offset and a contrast ratio of at least 3:1 against adjacent fill, border, and background colors (WCAG 2.4.11), even when the rest of the component styling stays restrained.
 - Use it when: the component can receive focus through keyboard, assistive tech, or remote input.
 - Check: focus remains visible on light, dark, filled, and outlined variants.
 

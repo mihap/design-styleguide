@@ -13,7 +13,9 @@
 | Primary           | [value]  | [--color-variable]        | [Usage — primary buttons, CTAs]   |
 | Primary Content   | [value]  | [--color-variable]        | [Usage — text/icons on primary]   |
 | Secondary         | [value]  | [--color-variable]        | [Usage — less prominent actions]  |
+| Secondary Content | [value]  | [--color-variable]        | [Usage — text/icons on secondary] |
 | Accent            | [value]  | [--color-variable]        | [Usage — links, focus rings]      |
+| Accent Content    | [value]  | [--color-variable]        | [Usage — text/icons on accent]    |
 
 ---
 
@@ -51,6 +53,19 @@
 | Success | [value] | [--color-variable]   | [Usage — confirmations, valid inputs]    | [content color]   |
 | Warning | [value] | [--color-variable]   | [Usage — cautions, pending states]       | [content color]   |
 | Error   | [value] | [--color-variable]   | [Usage — errors, destructive actions]    | [content color]   |
+
+---
+
+## Semantic Content Colors
+
+[One-line description — content tokens paired with each semantic background to keep text and icons readable on top of Info, Success, Warning, and Error fills.]
+
+| Color           | Value   | CSS Variable         | Usage                                  |
+|-----------------|---------|----------------------|----------------------------------------|
+| Info Content    | [value] | [--color-variable]   | [Usage — text/icons on info]           |
+| Success Content | [value] | [--color-variable]   | [Usage — text/icons on success]        |
+| Warning Content | [value] | [--color-variable]   | [Usage — text/icons on warning]        |
+| Error Content   | [value] | [--color-variable]   | [Usage — text/icons on error]          |
 
 ---
 

@@ -8,7 +8,7 @@ Use this appendix to decide how the system shows depth after color, spacing, and
 
 ### Shadow Scale
 
-- Rule: Use subtle shadows to indicate elevation, not to paint every surface with depth.
+- Rule: Use shadows with low opacity, limited blur, and limited spread to indicate elevation; never let a shadow become the strongest visual separator on its surface.
 - Use it when: a surface must read as floating above the page or above another surface.
 - Check: the shadow clarifies stacking order without becoming the strongest visual element.
 

@@ -11,7 +11,7 @@
 | Default         | [Description]                   | [Visual treatment]                   |
 | Hover           | [Description]                   | [Visual treatment]                   |
 | Focus           | [Description]                   | [Visual treatment]                   |
-| Active/Pressed  | [Description]                   | [Visual treatment]                   |
+| Active / Pressed | [Description]                  | [Visual treatment]                   |
 | Selected        | [Description]                   | [Visual treatment]                   |
 | Disabled        | [Description]                   | [Visual treatment]                   |
 | Loading         | [Description]                   | [Visual treatment]                   |
@@ -27,7 +27,7 @@
 | Default   | [token]          | [token]      | [token]   | [Notes]                        |
 | Hover     | [token / shift]  | [token]      | [token]   | [Notes]                        |
 | Focus     | [token]          | [token]      | [token]   | [focus ring spec]              |
-| Active    | [token / shift]  | [token]      | [token]   | [transform]                    |
+| Active / Pressed | [token / shift] | [token]   | [token]   | [transform]                    |
 | Disabled  | [token / opacity]| [token / op] | [token]   | [cursor rule]                  |
 | Loading   | [token]          | [token]      | [token]   | [indicator + pointer-events]   |
 
@@ -40,7 +40,7 @@
 | Default   | [token]       | [token]       | [token / width]   | [Notes]           |
 | Hover     | [token]       | [token]       | [token / width]   | [Notes]           |
 | Focus     | [token]       | [token]       | [token / width]   | [focus ring spec] |
-| Active    | [token]       | [token]       | [token / width]   | [transform]       |
+| Active / Pressed | [token] | [token]       | [token / width]   | [transform]       |
 | Disabled  | [token]       | [token / op]  | [token / op]      | [cursor rule]     |
 
 ---
