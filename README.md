@@ -120,7 +120,7 @@ The intended agent workflow is:
 5. Build the deterministic demo with `node scripts/build-demo.mjs <guide-dir>`.
 6. Run the quality gate with `node templates/validators/validate-all.mjs <guide-dir>`.
 
-Reusable intake templates live in `templates/intake/`, reusable review prompts live in `templates/review/`, reusable validators live in `templates/validators/`, reusable demo templates live in `templates/demo/`, and committed generated examples live in `examples/`.
+Reusable intake templates live in `templates/intake/`, reusable review prompts and visual QA checklists live in `templates/review/`, reusable validators live in `templates/validators/`, reusable demo templates live in `templates/demo/`, and committed generated examples live in `examples/`.
 
 ---
 

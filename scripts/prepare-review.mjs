@@ -25,6 +25,8 @@ const prompt = fs.readFileSync(path.join(repoRoot, 'templates', 'review', 'guide
 const files = fs.readdirSync(guideRoot)
   .filter((file) => /^\d{2}-.*\.md$/.test(file) || file === 'manifest.json')
   .sort();
-const packet = `${prompt}\n\n---\n\n## Files to Review\n\n${files.map((file) => `- ${path.join(path.relative(repoRoot, guideRoot), file)}`).join('\n')}\n\n## Recommended Commands\n\n\`\`\`bash\nnode templates/validators/validate-all.mjs ${path.relative(repoRoot, guideRoot)}\nnode ${path.join(path.relative(repoRoot, guideRoot), 'scripts/validate-all.mjs')} ${path.relative(repoRoot, guideRoot)}\n\`\`\`\n`;
+const visualChecklistPath = path.join(repoRoot, 'templates', 'review', 'demo-visual-review.md');
+const visualChecklist = fs.existsSync(visualChecklistPath) ? fs.readFileSync(visualChecklistPath, 'utf8') : '';
+const packet = `${prompt}\n\n---\n\n## Files to Review\n\n${files.map((file) => `- ${path.join(path.relative(repoRoot, guideRoot), file)}`).join('\n')}\n\n## Recommended Commands\n\n\`\`\`bash\nnode templates/validators/validate-all.mjs ${path.relative(repoRoot, guideRoot)}\nnode ${path.join(path.relative(repoRoot, guideRoot), 'scripts/validate-all.mjs')} ${path.relative(repoRoot, guideRoot)}\n\`\`\`\n\n---\n\n${visualChecklist}\n`;
 fs.writeFileSync(path.join(reviewDir, 'review-packet.md'), packet);
 console.log(`Wrote ${path.join(reviewDir, 'review-packet.md')}`);

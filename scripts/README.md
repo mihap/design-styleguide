@@ -40,7 +40,7 @@ Renders `demo/index.html` from `demo/demo-data.json` using the reusable determin
 node scripts/prepare-review.mjs examples/product-name-design-guide
 ```
 
-Writes `review/review-packet.md` for an independent reviewer or review subagent.
+Writes `review/review-packet.md` for an independent reviewer or review subagent. Use `templates/review/demo-visual-review.md` for the browser-based visual QA pass after validators pass.
 
 ## Quality gate
 

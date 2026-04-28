@@ -30,7 +30,8 @@ You are an independent reviewer. You did not author the guide. Review the genera
 7. Confirm Tailwind export targets latest stable Tailwind only and uses no component-framework assumptions.
 8. Confirm demo is deterministic, schema-driven, sidebar-navigable, and backed by the validated Tailwind export.
 9. Confirm color pairs used for content on fills meet at least 3:1 contrast, and body-like text pairs meet WCAG AA where applicable.
-10. Run the validators and report exact commands and results.
+10. Run the demo visual review checklist from `templates/review/demo-visual-review.md` when browser access is available.
+11. Run the validators and report exact commands and results.
 
 ## Output Format
 
@@ -40,6 +41,7 @@ Return:
 - `Blocking issues`: ordered list with file paths and exact fix instructions
 - `Non-blocking improvements`: ordered list
 - `Validator results`: commands run and pass/fail result
+- `Visual review results`: checklist status and viewport notes when performed
 - `Final recommendation`: production-ready or not
 
 Do not invent missing design decisions. If a production decision is missing, flag it as blocking.
