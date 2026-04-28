@@ -21,206 +21,148 @@ Define and implement an AI-agent workflow that turns a cloned repository plus us
 
 ---
 
-## Task List
+## Implementation Status
 
-### Phase 1 — Define the generation contract
+Status: **implemented and validated** using `examples/mailpilot-design-guide/` as the work-surface guide.
 
-- [x] Define the generated directory structure for `{name}-design-guide/`.
-- [x] Define required user intake fields: guide name, product context, visual direction, constraints, brand inputs, typography inputs, color requirements, accessibility requirements, density preferences, and examples/references.
-- [x] Define optional user intake fields: preferred color format, existing Tailwind config, token JSON, theme CSS, screenshots, brand guide, and component inventory.
-- [x] Define what happens when required information is missing: ask follow-up questions before final output; never invent production decisions silently.
-- [x] Define naming rules for `{name}` → filesystem-safe slug.
-- [x] Create `examples/` and add the first work-surface guide at `examples/mailpilot-design-guide/`.
-- [x] Define a generated-output manifest that records source inputs, assumptions, decisions, and validation results.
+Validated with:
 
-### Phase 2 — Create the generated guide
+```bash
+node templates/validators/validate-all.mjs examples/mailpilot-design-guide
+node scripts/smoke-test.mjs --full
+```
 
-- [x] Create `{name}-design-guide/`.
-- [x] Copy all files from `design-system-blueprint/` into `{name}-design-guide/`.
-- [ ] Fill the copied blueprint from user direction and supplied source materials.
-- [ ] Preserve file numbering, heading levels, table shapes, column order, and row order unless explicitly directed otherwise.
-- [ ] Replace placeholders in place; do not wrap completed values in brackets.
-- [ ] Use plain `—` for intentional not-applicable cells.
-- [ ] Keep token families aligned: colors in `02`, typography in `03`, spacing in `04`, radius in `05`, elevation/shadow in `06`, and component usage in `07–12`.
+## Implemented Workflow
 
-### Phase 3 — Merge appendices into generated sections
+### Phase 1 — Generation contract
 
-- [x] Map each appendix file in `design-system-blueprint-appendices/` to its matching generated chapter.
-- [x] Parse each appendix `Best Practices by Blueprint Section` subsection.
-- [x] Insert each subsection's guidance into the matching generated chapter section using a deterministic subsection label such as `Operational Guidance`.
-- [x] Append chapter-level `DO` and `DON'T` guidance under deterministic `Operational DO` and `Operational DON'T` subsections.
-- [x] Convert `Local Decisions Required` into concrete generated-guide decisions whenever user input supports them.
-- [x] If a local decision cannot be resolved, stop and ask the user before production-ready output is declared.
-- [x] Ensure merged appendix content remains self-contained and does not include source maps, evidence ledgers, IDs, citations, or corpus references.
+- [x] Defined generated directory structure for `{name}-design-guide/`.
+- [x] Defined required user intake fields in `templates/intake/design-guide-intake.md`.
+- [x] Defined optional user intake fields in `templates/intake/design-guide-intake.md`.
+- [x] Defined missing-information behavior: ask follow-up questions unless the user explicitly allows opinionated draft decisions.
+- [x] Defined slug naming rules in `scripts/create-guide.mjs`.
+- [x] Created `examples/` and first work-surface guide at `examples/mailpilot-design-guide/`.
+- [x] Defined generated-output manifest and validation result recording.
 
-### Phase 4 — Review and auto-fix the generated guide
+### Phase 2 — Generated guide creation
 
-- [x] Provide a separate-review prompt and `scripts/prepare-review.mjs` review packet generator.
-- [x] Run a separate review pass using a reviewer prompt or subagent that did not author the initial guide.
-- [x] Check for missing sections, missing values, unresolved local decisions, bracket placeholders, token drift, table-shape drift, unit errors, and framework contamination.
-- [x] Check cross-file consistency across token families and component usage.
-- [x] Automatically fix issues that can be fixed from existing source material.
-- [x] Ask the user for any remaining design decisions that cannot be inferred safely.
-- [x] Repeat review and fixes until the generated guide passes the documentation quality gate.
+- [x] Implemented guide scaffolding in `scripts/create-guide.mjs`.
+- [x] Copied blueprint files into generated guide workspaces.
+- [x] Filled the MailPilot example from user direction and explicit permission to invent missing decisions.
+- [x] Preserved file numbering, heading levels, table shapes, column order, and row order.
+- [x] Replaced placeholders in completed output.
+- [x] Enforced plain `—` for intentional not-applicable values.
+- [x] Kept token families aligned: colors `02`, typography `03`, spacing `04`, radius `05`, elevation/shadow `06`, and components `07–12`.
 
-### Phase 5 — Build the Tailwind export
+### Phase 3 — Appendix merge
 
-- [ ] Read the current official Tailwind documentation before implementation and use the latest stable Tailwind package at generation time.
-- [x] Create a Tailwind export directory inside `{name}-design-guide/`, for example `tailwind/`.
-- [x] Add a `package.json` using Tailwind latest stable packages and build scripts.
-- [x] Export tokens and scales from the completed guide into Tailwind-compatible CSS/config artifacts.
-- [x] Prefer Tailwind's current best-practice customization model; for Tailwind v4-style projects, expect a CSS-first theme export using `@theme` plus importable CSS.
-- [x] Include import instructions showing how a real website consumes the generated Tailwind customization.
-- [x] Include a machine-readable token artifact, such as `tokens.json`, to support validation and future integrations.
-- [x] Keep the export Tailwind-specific but component-framework-agnostic.
+- [x] Implemented appendix merge automation in `scripts/merge-appendices.mjs`.
+- [x] Mapped appendix files to matching generated chapters.
+- [x] Parsed appendix `Best Practices by Blueprint Section` subsections.
+- [x] Inserted deterministic `Operational Guidance` blocks.
+- [x] Added `Operational DO`, `Operational DON'T`, and `Local Decisions Made` sections.
+- [x] Blocked unresolved local decisions unless explicitly allowed.
+- [x] Preserved self-contained appendix guidance without source maps, evidence ledgers, IDs, citations, or corpus references.
 
-### Phase 6 — Validate the Tailwind export until clean
+### Phase 4 — Review and auto-fix
 
-- [x] Provide reusable validator templates in `templates/validators/`, including `validate-tailwind-export.mjs`.
-- [x] Validate that all exported tokens exist in the source guide and all source-guide token families are represented in the export.
-- [x] Validate units: rem/tokens for sizes, px for hairlines, unitless line heights, em letter spacing, ms durations.
-- [x] Compile a fixture stylesheet with the generated Tailwind export.
-- [x] Compile fixture HTML that exercises expected theme utilities, component states, colors, typography, spacing, radius, shadows, and button icon-size rows.
-- [x] Fail on missing CSS output, unresolved variables, invalid utilities, invalid token references, or framework contamination.
-- [x] Automatically fix deterministic export issues and rerun validation.
-- [x] Repeat until the validator exits with zero errors.
+- [x] Added separate-review prompt in `templates/review/guide-review-prompt.md`.
+- [x] Added review packet generator in `scripts/prepare-review.mjs`.
+- [x] Ran separate reviewer passes and fixed blocking issues.
+- [x] Validator coverage now checks missing sections, placeholders, unresolved decisions, token drift, table-shape drift, unit errors, and framework contamination.
+- [x] Cross-file consistency is checked across token families and component usage.
 
-### Phase 7 — Build the deterministic HTML demo
+### Phase 5 — Tailwind export
 
-- [x] Create reusable demo skeleton templates in `templates/demo/`.
-- [x] Define a demo schema before generating HTML.
-- [x] Use a deterministic data file, for example `demo/demo-data.json`, that conforms to the schema.
-- [x] Use the latest stable Tailwind package and the validated Tailwind export from Phase 6.
-- [x] Generate `demo/index.html` from the schema/data, not from ad hoc prose.
-- [x] Include sidebar navigation across all generated sections.
-- [x] Present each section as HTML component examples using the generated Tailwind tokens and utilities.
-- [x] Include examples for color, typography, spacing, radius, elevation, states, forms, buttons, navigation, tables, and feedback.
-- [x] Keep demo output static, deterministic, and component-framework-agnostic.
+- [x] Implemented Tailwind export generation in `scripts/build-tailwind-export.mjs`.
+- [x] Uses latest stable Tailwind package at generation/build time.
+- [x] Emits CSS-first Tailwind theme export using `@theme static`.
+- [x] Emits `tailwind/src/theme.css`, `tailwind/src/tokens.json`, `tailwind/src/fixture.html`, package files, and import instructions.
+- [x] Exports color, typography, font weights, line heights, letter spacing, spacing aliases, radius, shadows, and button icon-size utilities.
+- [x] Keeps export Tailwind-specific and component-framework-agnostic.
 
-### Phase 8 — Validate the HTML demo until clean
+### Phase 6 — Tailwind export validation
 
-- [x] Provide reusable demo validator template in `templates/validators/validate-demo.mjs`.
-- [x] Validate `demo/demo-data.json` against `demo/demo.schema.json`.
-- [x] Validate that every sidebar item targets an existing section.
-- [x] Validate that every demo section maps to a generated guide chapter.
-- [x] Validate that demo classes compile through the generated Tailwind export.
-- [x] Validate that no bracket placeholders or unresolved local decisions appear in demo HTML or data.
-- [x] Validate basic accessibility structure: document title, landmarks, headings, navigation labels, form labels, focusable controls, and color contrast checks where token pairs are available.
-- [x] Automatically fix deterministic demo issues and rerun validation.
-- [x] Repeat until the validator exits with zero errors.
+- [x] Added reusable Tailwind validator in `templates/validators/validate-tailwind-export.mjs`.
+- [x] Validates token-family coverage and source/export consistency.
+- [x] Validates units for size, line-height, letter-spacing, radius, and button icon-size values.
+- [x] Validates fill/content color contrast pairs.
+- [x] Compiles fixture stylesheet with Tailwind.
+- [x] Checks utility emission for fixture/demo classes.
+- [x] Fails on unresolved variables, invalid utilities, invalid token references, arbitrary bracket utilities, stale references, and framework contamination.
+
+### Phase 7 — Deterministic HTML demo
+
+- [x] Added reusable demo skeleton in `templates/demo/`.
+- [x] Added demo schema in `templates/demo/demo.schema.json`.
+- [x] Added deterministic data file pattern with `demo/demo-data.json`.
+- [x] Generates `demo/index.html` from schema/data through `templates/demo/build-demo.mjs` and `scripts/build-demo.mjs`.
+- [x] Includes sidebar navigation across generated sections.
+- [x] Presents each section as HTML examples using generated Tailwind tokens and utilities.
+- [x] Includes examples for color, typography, spacing, radius, elevation, states, forms, buttons, navigation, tables, feedback, and full product screens.
+- [x] Keeps demo static, deterministic, and component-framework-agnostic.
+
+### Phase 8 — Demo validation
+
+- [x] Added reusable demo validator in `templates/validators/validate-demo.mjs`.
+- [x] Validates `demo/demo-data.json` against `demo/demo.schema.json` constraints.
+- [x] Validates sidebar targets and section coverage.
+- [x] Validates demo classes through Tailwind export validation.
+- [x] Validates no placeholders, unresolved local decisions, stale references, or framework contamination.
+- [x] Validates accessibility structure: title, landmarks, labelled navigation, form labels, and focusable controls.
+- [x] Added visual review checklist in `templates/review/demo-visual-review.md`.
 
 ### Phase 9 — Final quality gate and handoff
 
-- [x] Run the guide validator, Tailwind export validator, and demo validator together.
-- [x] Write final validation results to the generated-output manifest.
-- [x] Confirm the generated directory is production-ready.
-- [x] Provide the user with a concise handoff: generated path, source assumptions, unresolved questions if any, build commands, validation commands, and import instructions.
+- [x] Added `templates/validators/validate-all.mjs` quality gate.
+- [x] Added `scripts/smoke-test.mjs` and full smoke-test mode.
+- [x] Writes validation results to `manifest.json`.
+- [x] Confirms generated directory is production-ready when all validators pass.
+- [x] Added README quickstart and script documentation.
 
 ---
 
-## Draft Implementation Plan for Review
+## Current Artifacts
 
-### Proposed generated directory structure
+### Work-surface example
 
 ```text
-{name}-design-guide/
-  00-cover.md
-  01-design-philosophy.md
-  02-color-system.md
-  03-typography.md
-  04-spacing-system.md
-  05-border-radius.md
-  06-shadows-elevation.md
-  07-component-states.md
-  08-form-elements.md
-  09-buttons.md
-  10-navigation.md
-  11-tables-data-display.md
-  12-feedback-alerts.md
+examples/mailpilot-design-guide/
+  00-cover.md ... 12-feedback-alerts.md
   manifest.json
   tailwind/
-    package.json
-    src/
-      input.css
-      theme.css
-      tokens.json
-      fixture.html
-    dist/
-      design-guide.css
-    README.md
   demo/
-    demo.schema.json
-    demo-data.json
-    index.html
-    assets/
+  review/
   scripts/
-    validate-guide.mjs
-    validate-tailwind-export.mjs
-    validate-demo.mjs
-    validate-all.mjs
 ```
 
-### Proposed appendix merge rule
+### Reusable scripts
 
-1. Match appendix file number to generated chapter number.
-2. For each appendix subsection under `Best Practices by Blueprint Section`, find the matching heading in the generated chapter.
-3. Insert a nested `Operational Guidance` block immediately after that section's table or explanatory paragraph.
-4. Add chapter-level `Operational DO`, `Operational DON'T`, and `Local Decisions Made` sections near the end of the chapter.
-5. Convert unresolved `Local Decisions Required` bullets into explicit decisions or user questions before the quality gate.
-
-### Proposed validation strategy
-
-Use validators as normal generated artifacts, not just one-off agent checks:
-
-- `validate-guide.mjs` checks guide completeness, table stability, no brackets, token family consistency, units, appendix merge completeness, no unresolved local decisions, and no non-Tailwind framework assumptions.
-- `validate-tailwind-export.mjs` checks token coverage, Tailwind build success, utility compilation, importability, units, and framework contamination.
-- `validate-demo.mjs` checks demo schema validity, sidebar links, chapter coverage, placeholder absence, Tailwind compilation, and basic accessibility structure.
-- `validate-all.mjs` runs all validators and writes pass/fail details into `manifest.json`.
-
-### Proposed deterministic demo schema
-
-The demo should be generated from structured data with these top-level fields:
-
-```json
-{
-  "guideName": "string",
-  "version": "string",
-  "tailwindExport": "string",
-  "sections": [
-    {
-      "id": "string",
-      "title": "string",
-      "sourceChapter": "string",
-      "examples": [
-        {
-          "id": "string",
-          "title": "string",
-          "description": "string",
-          "type": "color|typography|spacing|surface|state|form|button|navigation|table|feedback",
-          "tokens": ["string"],
-          "props": { "structuredExampleData": true }
-        }
-      ]
-    }
-  ]
-}
+```text
+scripts/create-guide.mjs
+scripts/merge-appendices.mjs
+scripts/build-tailwind-export.mjs
+scripts/build-demo.mjs
+scripts/prepare-review.mjs
+scripts/smoke-test.mjs
 ```
 
-### Proposed quality gate definition
+### Reusable templates
 
-The generated package is production-ready only when:
+```text
+templates/intake/design-guide-intake.md
+templates/review/guide-review-prompt.md
+templates/review/demo-visual-review.md
+templates/demo/
+templates/validators/
+```
 
-- No bracket placeholders remain in the generated guide, Tailwind export, or demo.
-- No unresolved local decisions remain.
-- All token references resolve to their source chapters.
-- Tailwind export builds successfully with latest stable Tailwind at generation time.
-- Demo builds from schema/data and uses the validated Tailwind export.
-- All validators pass with zero errors.
-- The manifest records inputs, assumptions, decisions, commands run, and validation results.
+## Remaining Optional Enhancements
 
-## Resolved Decisions
+These are not blockers for the initial plan:
 
-- Generated examples should be committed under `examples/`; the first work-surface guide is `examples/mailpilot-design-guide/`.
-- Reusable validator templates live in this repository under `templates/validators/` and can be copied into generated guides.
-- The reusable HTML demo skeleton lives under `templates/demo/`; examples should be generated from structured component-example data and typed props, not raw ad hoc markup.
-- Tailwind export targets the latest stable Tailwind release only; no legacy compatibility config is required.
+- Add automated screenshot capture for demo review artifacts.
+- Add browser-driven visual regression checks.
+- Add contrast validation for more contextual text/background combinations, not only exported fill/content pairs.
+- Add stricter generated-demo richness requirements per section.
+- Add a second example guide to exercise a different product domain.
