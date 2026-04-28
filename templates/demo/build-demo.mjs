@@ -19,23 +19,42 @@ function attrs(classes) {
   return esc(classes || '');
 }
 
+function actionElement(item) {
+  if (item.element === 'a') return `<a href="#${esc(item.href || 'states')}" class="${attrs(item.class)}">${esc(item.label)}</a>`;
+  if (item.element === 'input') return `<input aria-label="${esc(item.label)}" class="${attrs(item.class)}" placeholder="${esc(item.placeholder || item.label)}" value="${esc(item.value || '')}">`;
+  const disabled = item.disabled ? ' disabled' : '';
+  return `<button class="${attrs(item.class)}"${disabled}>${esc(item.label)}</button>`;
+}
+
 function renderBody(example) {
   const props = example.props || {};
   switch (example.type) {
-    case 'color':
-      return `<div class="grid gap-3 sm:grid-cols-2">${(props.swatches || []).map((item) => `<div class="overflow-hidden rounded-lg border border-base-300"><div class="h-16 ${attrs(item.class)}"></div><div class="bg-base-100 p-3"><p class="text-sm font-semibold">${esc(item.name)}</p><p class="text-xs text-base-content/60">${esc(item.token)}</p></div></div>`).join('')}</div>`;
-    case 'typography':
-      return `<div class="space-y-4">${(props.samples || []).map((item) => `<div><p class="mb-1 text-xs font-medium uppercase tracking-wide text-base-content/50">${esc(item.label)}</p><p class="${attrs(item.class)}">${esc(item.text)}</p></div>`).join('')}</div>`;
+    case 'color': {
+      const swatches = props.swatches?.length ? `<div class="grid gap-3 sm:grid-cols-2">${props.swatches.map((item) => `<div class="overflow-hidden rounded-lg border border-base-300"><div class="h-16 ${attrs(item.class)}"></div><div class="bg-base-100 p-3"><p class="text-sm font-semibold">${esc(item.name)}</p><p class="text-xs text-base-content/60">${esc(item.token)}</p></div></div>`).join('')}</div>` : '';
+      const usage = props.usageRows?.length ? `<div class="overflow-hidden rounded-lg border border-base-300"><table class="w-full text-left text-sm"><thead class="bg-base-200 text-xs uppercase tracking-wider text-base-content/60"><tr><th class="px-3 py-2">Use</th><th class="px-3 py-2">Example</th><th class="px-3 py-2">Rule</th></tr></thead><tbody class="divide-y divide-base-300 bg-base-100">${props.usageRows.map((item) => `<tr><td class="px-3 py-3 font-medium">${esc(item.name)}</td><td class="px-3 py-3"><span class="${attrs(item.class)}">${esc(item.text)}</span></td><td class="px-3 py-3 text-base-content/65">${esc(item.rule)}</td></tr>`).join('')}</tbody></table></div>` : '';
+      return `<div class="space-y-4">${swatches}${usage}</div>`;
+    }
+    case 'typography': {
+      const fontStacks = props.fontStacks?.length ? `<div class="grid gap-3 sm:grid-cols-2">${props.fontStacks.map((item) => `<div class="rounded-lg border border-base-300 bg-base-100 p-4"><p class="text-xs font-medium uppercase tracking-wide text-base-content/50">${esc(item.label)}</p><p class="mt-2 ${attrs(item.class)}">${esc(item.text)}</p><p class="mt-2 text-xs text-base-content/60">${esc(item.rule)}</p></div>`).join('')}</div>` : '';
+      const samples = props.samples?.length ? `<div class="space-y-4">${props.samples.map((item) => `<div><p class="mb-1 text-xs font-medium uppercase tracking-wide text-base-content/50">${esc(item.label)}</p><p class="${attrs(item.class)}">${esc(item.text)}</p><p class="mt-1 text-xs text-base-content/60">${esc(item.rule || '')}</p></div>`).join('')}</div>` : '';
+      const scale = props.scale?.length ? `<div class="overflow-hidden rounded-lg border border-base-300"><table class="w-full text-left text-sm"><thead class="bg-base-200 text-xs uppercase tracking-wider text-base-content/60"><tr><th class="px-3 py-2">Token</th><th class="px-3 py-2">Size</th><th class="px-3 py-2">Example</th></tr></thead><tbody class="divide-y divide-base-300 bg-base-100">${props.scale.map((item) => `<tr><td class="px-3 py-3 font-medium">${esc(item.name)}</td><td class="px-3 py-3 text-base-content/65">${esc(item.size)}</td><td class="px-3 py-3"><span class="${attrs(item.class)}">${esc(item.text)}</span></td></tr>`).join('')}</tbody></table></div>` : '';
+      return `<div class="space-y-4">${fontStacks}${scale}${samples}</div>`;
+    }
     case 'spacing':
       return `<div class="space-y-3">${(props.items || []).map((item) => `<div class="flex items-center gap-3"><div class="${attrs(item.class)} rounded bg-primary"></div><div><p class="text-sm font-medium">${esc(item.name)}</p><p class="text-xs text-base-content/60">${esc(item.value)}</p></div></div>`).join('')}</div>`;
     case 'surface':
       return `<div class="grid gap-3">${(props.cards || []).map((item) => `<div class="${attrs(item.class)}"><p class="text-sm font-semibold">${esc(item.title)}</p><p class="mt-1 text-sm text-base-content/65">${esc(item.text)}</p></div>`).join('')}</div>`;
-    case 'state':
-      return `<div class="flex flex-wrap gap-3">${(props.states || []).map((item) => `<button class="${attrs(item.class)}">${esc(item.label)}</button>`).join('')}</div>`;
+    case 'state': {
+      const groups = props.groups || [{ title: '', states: props.states || [] }];
+      return `<div class="space-y-4">${groups.map((group) => `<div><p class="mb-2 text-xs font-semibold uppercase tracking-wide text-base-content/50">${esc(group.title)}</p><div class="flex flex-wrap items-center gap-3">${(group.states || []).map(actionElement).join('')}</div></div>`).join('')}</div>`;
+    }
     case 'form':
       return `<form class="space-y-4"><label class="block"><span class="text-xs font-medium text-base-content">Mailbox</span><input class="mt-1.5 h-10 w-full rounded-md border border-base-300 bg-base-100 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" value="support@company.com"></label><label class="flex items-center justify-between rounded-lg border border-base-300 bg-base-100 p-3"><span><span class="block text-sm font-medium">Auto-route urgent mail</span><span class="text-xs text-base-content/60">Send SLA risk messages to review.</span></span><span class="h-6 w-10 rounded-full bg-primary p-1"><span class="block h-4 w-4 translate-x-4 rounded-full bg-primary-content"></span></span></label></form>`;
-    case 'button':
-      return `<div class="flex flex-wrap gap-3">${(props.buttons || []).map((item) => `<button class="${attrs(item.class)}">${esc(item.label)}</button>`).join('')}</div>`;
+    case 'button': {
+      const buttons = props.buttons?.length ? `<div class="flex flex-wrap items-center gap-3">${props.buttons.map(actionElement).join('')}</div>` : '';
+      const icons = props.iconSizes?.length ? `<div class="mt-4 flex flex-wrap items-end gap-4">${props.iconSizes.map((item) => `<div class="text-center"><span class="mx-auto block ${attrs(item.class)} rounded-full bg-primary"></span><p class="mt-2 text-xs font-medium">${esc(item.name)}</p><p class="text-xs text-base-content/60">${esc(item.value)}</p></div>`).join('')}</div>` : '';
+      return `<div>${buttons}${icons}</div>`;
+    }
     case 'navigation':
       return `<nav class="space-y-1" aria-label="Example navigation">${(props.items || []).map((item) => `<a class="${attrs(item.class)}" href="#${esc(item.href || 'navigation')}">${esc(item.label)}<span class="ml-auto rounded-full bg-base-200 px-2 py-0.5 text-xs">${esc(item.count || '')}</span></a>`).join('')}</nav>`;
     case 'table':

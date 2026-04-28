@@ -14,6 +14,8 @@ font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
 font-family: "JetBrains Mono", "SFMono-Regular", ui-monospace, monospace;
 ```
 
+Inter is the primary interface font; JetBrains Mono is the secondary utility font for rule syntax, snippets, IDs, and message headers.
+
 ---
 
 ## Font Weights
@@ -91,7 +93,8 @@ Consistent spacing makes guidance, audit logs, and setup screens easier to scan.
 
 ## Operational Guidance
 
-- Use body text at 0.875rem for dense app surfaces and 1rem for explanatory onboarding copy.
+- Treat Body at 0.875rem as the main app font size for tables, controls, and mailbox previews.
+- Use body text at 1rem for explanatory onboarding copy.
 - Keep labels close to their controls and use semibold only where hierarchy needs it.
 - Use tabular numbers for counts, latency, SLA age, and mailbox metrics.
 

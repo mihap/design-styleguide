@@ -79,8 +79,8 @@ Semantic content tokens keep text and icons readable on status fills.
 | Secondary text (descriptions, captions)    | --mp-color-base-content     | 70%                   |
 | Disabled text                              | --mp-color-base-content     | 40%                   |
 | Placeholder text                           | --mp-color-base-content     | 45%                   |
-| Links                                      | --mp-color-primary          | 100%                  |
-| Link hover                                 | --mp-color-primary          | 88% plus underline    |
+| Links                                      | --mp-color-primary          | text-primary underline-offset-2 |
+| Link hover                                 | --mp-color-primary          | hover:text-primary/80 hover:underline |
 | Error text                                 | --mp-color-error            | 100%                  |
 | Success text                               | --mp-color-success          | 100%                  |
 

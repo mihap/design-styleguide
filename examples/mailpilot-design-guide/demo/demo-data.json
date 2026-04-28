@@ -15,11 +15,22 @@
           "title": "Principle cards",
           "description": "Principles use restrained surfaces with colorful accents only where workflow meaning exists.",
           "type": "surface",
-          "tokens": ["--mp-color-base-100", "--mp-color-primary"],
+          "tokens": [
+            "--mp-color-base-100",
+            "--mp-color-primary"
+          ],
           "props": {
             "cards": [
-              { "title": "Context before automation", "text": "Show the message, sender, workflow, and next action before running rules.", "class": "rounded-xl border border-base-300 bg-base-100 p-4 shadow-xs" },
-              { "title": "Color means workflow state", "text": "Queue health, urgency, ownership, and automation status receive color before decoration does.", "class": "rounded-xl border border-primary bg-primary/10 p-4 shadow-xs" }
+              {
+                "title": "Context before automation",
+                "text": "Show the message, sender, workflow, and next action before running rules.",
+                "class": "rounded-xl border border-base-300 bg-base-100 p-4 shadow-xs"
+              },
+              {
+                "title": "Color means workflow state",
+                "text": "Queue health, urgency, ownership, and automation status receive color before decoration does.",
+                "class": "rounded-xl border border-primary bg-primary/10 p-4 shadow-xs"
+              }
             ]
           }
         }
@@ -36,13 +47,96 @@
           "title": "Brand and semantic swatches",
           "description": "Primary, secondary, accent, and semantic colors map to action and workflow meaning.",
           "type": "color",
-          "tokens": ["--mp-color-primary", "--mp-color-secondary", "--mp-color-accent", "--mp-color-success"],
+          "tokens": [
+            "--mp-color-primary",
+            "--mp-color-secondary",
+            "--mp-color-accent",
+            "--mp-color-success"
+          ],
           "props": {
             "swatches": [
-              { "name": "Primary", "token": "--mp-color-primary", "class": "bg-primary" },
-              { "name": "Secondary", "token": "--mp-color-secondary", "class": "bg-secondary" },
-              { "name": "Accent", "token": "--mp-color-accent", "class": "bg-accent" },
-              { "name": "Success", "token": "--mp-color-success", "class": "bg-success" }
+              {
+                "name": "Primary",
+                "token": "--mp-color-primary",
+                "class": "bg-primary"
+              },
+              {
+                "name": "Secondary",
+                "token": "--mp-color-secondary",
+                "class": "bg-secondary"
+              },
+              {
+                "name": "Accent",
+                "token": "--mp-color-accent",
+                "class": "bg-accent"
+              },
+              {
+                "name": "Success",
+                "token": "--mp-color-success",
+                "class": "bg-success"
+              },
+              {
+                "name": "Warning",
+                "token": "--mp-color-warning",
+                "class": "bg-warning"
+              },
+              {
+                "name": "Error",
+                "token": "--mp-color-error",
+                "class": "bg-error"
+              }
+            ]
+          }
+        },
+        {
+          "id": "text-and-link-colors",
+          "title": "Text, link, and status color usage",
+          "description": "Text colors use one content token with opacity steps; links and semantic text use explicit tokens.",
+          "type": "color",
+          "tokens": [
+            "--mp-color-base-content",
+            "--mp-color-primary",
+            "--mp-color-error",
+            "--mp-color-success"
+          ],
+          "props": {
+            "usageRows": [
+              {
+                "name": "Primary text",
+                "text": "Message subject and page heading",
+                "class": "text-base-content font-semibold",
+                "rule": "Use base content at full opacity for headings and body."
+              },
+              {
+                "name": "Secondary text",
+                "text": "Last reply from Acme Ops",
+                "class": "text-base-content/70",
+                "rule": "Use 70% opacity for descriptions and preview text."
+              },
+              {
+                "name": "Disabled text",
+                "text": "Automation paused",
+                "class": "text-base-content/40",
+                "rule": "Use 40% opacity with disabled affordance."
+              },
+              {
+                "name": "Inline link",
+                "text": "Open mailbox settings",
+                "class": "text-primary underline underline-offset-2 decoration-primary/40 hover:text-primary/80 hover:decoration-primary",
+                "rule": "Use primary text with underline affordance and hover change."
+              },
+              {
+                "name": "Error text",
+                "text": "Mailbox sync failed",
+                "class": "text-error font-medium",
+                "rule": "Use error for failed sync, destructive, and validation text."
+              },
+              {
+                "name": "Success text",
+                "text": "Rule published successfully",
+                "class": "text-success font-medium",
+                "rule": "Use success for completed automation and valid setup."
+              }
             ]
           }
         }
@@ -55,16 +149,133 @@
       "description": "Inter provides crisp scanning for inbox rows, setup flows, and automation explanations.",
       "examples": [
         {
-          "id": "type-scale",
-          "title": "Type scale",
-          "description": "Large headings are reserved for setup and empty states; app surfaces use compact body text.",
+          "id": "font-stacks",
+          "title": "Primary and secondary font stacks",
+          "description": "Inter is the main interface font; JetBrains Mono is the secondary utility font for code, rules, and message headers.",
           "type": "typography",
-          "tokens": ["Inter", "text-4xl", "text-sm"],
+          "tokens": [
+            "Inter",
+            "JetBrains Mono",
+            "font-sans",
+            "font-mono"
+          ],
+          "props": {
+            "fontStacks": [
+              {
+                "label": "Primary sans",
+                "text": "Inter handles mailbox lists, forms, buttons, and navigation.",
+                "class": "font-sans text-sm leading-6 text-base-content",
+                "rule": "Use for all product UI and prose."
+              },
+              {
+                "label": "Secondary mono",
+                "text": "if sender.domain == 'vip.customer' then priority = high",
+                "class": "font-mono text-sm leading-6 text-base-content",
+                "rule": "Use for rule syntax, message headers, IDs, and snippets."
+              }
+            ]
+          }
+        },
+        {
+          "id": "type-scale",
+          "title": "Type scale and main font size",
+          "description": "The main app font size is Body at 0.875rem; 1rem is reserved for explanatory copy.",
+          "type": "typography",
+          "tokens": [
+            "text-5xl",
+            "text-4xl",
+            "text-sm",
+            "text-xs"
+          ],
+          "props": {
+            "scale": [
+              {
+                "name": "Display",
+                "size": "3rem",
+                "text": "Inbox automation, explained",
+                "class": "text-5xl font-semibold tracking-tighter leading-tight"
+              },
+              {
+                "name": "H1",
+                "size": "2.25rem",
+                "text": "Automate the shared inbox",
+                "class": "text-4xl font-semibold tracking-tight leading-tight"
+              },
+              {
+                "name": "H2",
+                "size": "1.875rem",
+                "text": "Review queue health",
+                "class": "text-3xl font-semibold tracking-tight leading-tight"
+              },
+              {
+                "name": "H3",
+                "size": "1.5rem",
+                "text": "Routing rule details",
+                "class": "text-2xl font-semibold leading-snug"
+              },
+              {
+                "name": "Body Large",
+                "size": "1rem",
+                "text": "Use for setup guidance and onboarding explanations.",
+                "class": "text-base leading-relaxed text-base-content/75"
+              },
+              {
+                "name": "Body main",
+                "size": "0.875rem",
+                "text": "Use for app body, tables, controls, and message previews.",
+                "class": "text-sm leading-6 text-base-content"
+              },
+              {
+                "name": "Small",
+                "size": "0.8125rem",
+                "text": "Owner, channel, and status metadata",
+                "class": "text-xs font-medium leading-5 text-base-content/70"
+              },
+              {
+                "name": "Tiny",
+                "size": "0.75rem",
+                "text": "SLA due in 38m",
+                "class": "text-xs font-medium tracking-wide text-warning-content"
+              }
+            ]
+          }
+        },
+        {
+          "id": "typographic-color-hierarchy",
+          "title": "Typography color hierarchy and links",
+          "description": "The same type scale uses color and opacity to separate content, metadata, links, and validation.",
+          "type": "typography",
+          "tokens": [
+            "--mp-color-base-content",
+            "--mp-color-primary",
+            "--mp-color-error"
+          ],
           "props": {
             "samples": [
-              { "label": "H1", "text": "Automate the shared inbox", "class": "text-4xl font-semibold tracking-tight" },
-              { "label": "Body", "text": "Route urgent messages, draft replies, and keep owners accountable.", "class": "text-sm leading-6 text-base-content/75" },
-              { "label": "Tiny metadata", "text": "SLA due in 38m", "class": "text-xs font-medium tracking-wide text-warning-content" }
+              {
+                "label": "Primary text",
+                "text": "New reply from Acme Ops needs routing",
+                "class": "text-sm font-semibold text-base-content",
+                "rule": "Use for subjects and important labels."
+              },
+              {
+                "label": "Secondary text",
+                "text": "Preview text, helper copy, and table descriptions use lower opacity.",
+                "class": "text-sm leading-6 text-base-content/70",
+                "rule": "Use for supporting content."
+              },
+              {
+                "label": "Link",
+                "text": "Open automation rule",
+                "class": "text-sm font-medium text-primary underline underline-offset-2 decoration-primary/40 hover:text-primary/80 hover:decoration-primary",
+                "rule": "Links are primary with underline and hover feedback."
+              },
+              {
+                "label": "Validation",
+                "text": "Connect a mailbox before enabling this rule.",
+                "class": "text-sm font-medium text-error",
+                "rule": "Use semantic text for local feedback."
+              }
             ]
           }
         }
@@ -81,13 +292,34 @@
           "title": "Spacing rhythm",
           "description": "The working rhythm centers around token 3 and token 4.",
           "type": "spacing",
-          "tokens": ["0.25rem", "0.75rem", "1rem", "1.5rem"],
+          "tokens": [
+            "0.25rem",
+            "0.75rem",
+            "1rem",
+            "1.5rem"
+          ],
           "props": {
             "items": [
-              { "name": "Token 2", "value": "0.5rem", "class": "h-2 w-8" },
-              { "name": "Token 3", "value": "0.75rem", "class": "h-3 w-12" },
-              { "name": "Token 4", "value": "1rem", "class": "h-4 w-16" },
-              { "name": "Token 6", "value": "1.5rem", "class": "h-6 w-24" }
+              {
+                "name": "Token 2",
+                "value": "0.5rem",
+                "class": "h-2 w-8"
+              },
+              {
+                "name": "Token 3",
+                "value": "0.75rem",
+                "class": "h-3 w-12"
+              },
+              {
+                "name": "Token 4",
+                "value": "1rem",
+                "class": "h-4 w-16"
+              },
+              {
+                "name": "Token 6",
+                "value": "1.5rem",
+                "class": "h-6 w-24"
+              }
             ]
           }
         }
@@ -104,12 +336,28 @@
           "title": "Radius scale in use",
           "description": "Controls use md, cards use lg, and pills use full radius.",
           "type": "surface",
-          "tokens": ["--mp-radius-md", "--mp-radius-lg", "--mp-radius-full"],
+          "tokens": [
+            "--mp-radius-md",
+            "--mp-radius-lg",
+            "--mp-radius-full"
+          ],
           "props": {
             "cards": [
-              { "title": "Input and button radius", "text": "0.5rem keeps controls compact and clear.", "class": "rounded-md border border-base-300 bg-base-100 p-4" },
-              { "title": "Card radius", "text": "0.75rem separates panels without feeling playful.", "class": "rounded-lg border border-base-300 bg-base-100 p-4" },
-              { "title": "Pill radius", "text": "Full radius is reserved for badges and filters.", "class": "rounded-full border border-primary bg-primary/10 p-4 text-primary" }
+              {
+                "title": "Input and button radius",
+                "text": "0.5rem keeps controls compact and clear.",
+                "class": "rounded-md border border-base-300 bg-base-100 p-4"
+              },
+              {
+                "title": "Card radius",
+                "text": "0.75rem separates panels without feeling playful.",
+                "class": "rounded-lg border border-base-300 bg-base-100 p-4"
+              },
+              {
+                "title": "Pill radius",
+                "text": "Full radius is reserved for badges and filters.",
+                "class": "rounded-full border border-primary bg-primary/10 p-4 text-primary"
+              }
             ]
           }
         }
@@ -126,12 +374,28 @@
           "title": "Elevation stack",
           "description": "Cards stay quiet, while popovers and modals receive stronger depth.",
           "type": "surface",
-          "tokens": ["shadow-xs", "shadow-md", "shadow-lg"],
+          "tokens": [
+            "shadow-xs",
+            "shadow-md",
+            "shadow-lg"
+          ],
           "props": {
             "cards": [
-              { "title": "Default card", "text": "Border-only surface for dashboard content.", "class": "rounded-lg border border-base-300 bg-base-100 p-4 shadow-none" },
-              { "title": "Popover", "text": "Medium shadow signals a floating menu.", "class": "rounded-lg border border-base-300 bg-base-100 p-4 shadow-md" },
-              { "title": "Modal", "text": "Large shadow supports blocking review.", "class": "rounded-xl border border-base-300 bg-base-100 p-4 shadow-lg" }
+              {
+                "title": "Default card",
+                "text": "Border-only surface for dashboard content.",
+                "class": "rounded-lg border border-base-300 bg-base-100 p-4 shadow-none"
+              },
+              {
+                "title": "Popover",
+                "text": "Medium shadow signals a floating menu.",
+                "class": "rounded-lg border border-base-300 bg-base-100 p-4 shadow-md"
+              },
+              {
+                "title": "Modal",
+                "text": "Large shadow supports blocking review.",
+                "class": "rounded-xl border border-base-300 bg-base-100 p-4 shadow-lg"
+              }
             ]
           }
         }
@@ -145,16 +409,90 @@
       "examples": [
         {
           "id": "button-states",
-          "title": "Action states",
-          "description": "Primary action states retain layout width and visible focus treatment.",
+          "title": "Button interaction states",
+          "description": "Primary buttons include hover, focus, active, disabled, and loading treatments.",
           "type": "state",
-          "tokens": ["--mp-color-primary", "--mp-color-error", "focus:ring-2"],
+          "tokens": [
+            "--mp-color-primary",
+            "focus:ring-2",
+            "active:translate-y-px"
+          ],
           "props": {
-            "states": [
-              { "label": "Default", "class": "rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-content" },
-              { "label": "Hover", "class": "rounded-md bg-primary/90 px-4 py-2 text-sm font-semibold text-primary-content" },
-              { "label": "Focused", "class": "rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-content ring-2 ring-primary ring-offset-2" },
-              { "label": "Disabled", "class": "cursor-not-allowed rounded-md bg-primary/45 px-4 py-2 text-sm font-semibold text-primary-content/70" }
+            "groups": [
+              {
+                "title": "Primary action states",
+                "states": [
+                  {
+                    "label": "Default",
+                    "class": "rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-content shadow-xs hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  },
+                  {
+                    "label": "Hover preview",
+                    "class": "rounded-md bg-primary/90 px-4 py-2 text-sm font-semibold text-primary-content shadow-xs"
+                  },
+                  {
+                    "label": "Focused",
+                    "class": "rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-content ring-2 ring-primary ring-offset-2"
+                  },
+                  {
+                    "label": "Active",
+                    "class": "translate-y-px rounded-md bg-primary/90 px-4 py-2 text-sm font-semibold text-primary-content shadow-none active:translate-y-px"
+                  },
+                  {
+                    "label": "Disabled",
+                    "class": "cursor-not-allowed rounded-md bg-primary/45 px-4 py-2 text-sm font-semibold text-primary-content/70 opacity-70 disabled:opacity-50",
+                    "disabled": true
+                  },
+                  {
+                    "label": "Loading\u2026",
+                    "class": "pointer-events-none rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-content opacity-80"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "link-states",
+          "title": "Link interaction states",
+          "description": "Links are visibly interactive without relying on color alone.",
+          "type": "state",
+          "tokens": [
+            "text-primary",
+            "underline",
+            "focus:ring-2"
+          ],
+          "props": {
+            "groups": [
+              {
+                "title": "Inline links",
+                "states": [
+                  {
+                    "label": "Default link",
+                    "element": "a",
+                    "href": "states",
+                    "class": "text-sm font-medium text-primary underline underline-offset-2 decoration-primary/40"
+                  },
+                  {
+                    "label": "Hover link",
+                    "element": "a",
+                    "href": "states",
+                    "class": "text-sm font-medium text-primary/80 underline underline-offset-2 decoration-primary"
+                  },
+                  {
+                    "label": "Focus link",
+                    "element": "a",
+                    "href": "states",
+                    "class": "rounded-sm text-sm font-medium text-primary underline underline-offset-2 ring-2 ring-primary ring-offset-2"
+                  },
+                  {
+                    "label": "Disabled link",
+                    "element": "a",
+                    "href": "states",
+                    "class": "pointer-events-none text-sm font-medium text-base-content/40 no-underline"
+                  }
+                ]
+              }
             ]
           }
         }
@@ -171,7 +509,11 @@
           "title": "Mailbox settings form",
           "description": "Fields, helper text, and toggles use the shared control rhythm.",
           "type": "form",
-          "tokens": ["rounded-md", "focus:ring-2", "--mp-color-primary"],
+          "tokens": [
+            "rounded-md",
+            "focus:ring-2",
+            "--mp-color-primary"
+          ],
           "props": {}
         }
       ]
@@ -187,13 +529,83 @@
           "title": "Button variants",
           "description": "Primary is reserved for the recommended next action.",
           "type": "button",
-          "tokens": ["--mp-color-primary", "--mp-color-secondary", "--mp-color-error"],
+          "tokens": [
+            "--mp-color-primary",
+            "--mp-color-secondary",
+            "--mp-color-error"
+          ],
           "props": {
             "buttons": [
-              { "label": "Automate", "class": "rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-content shadow-xs" },
-              { "label": "Assign", "class": "rounded-md bg-secondary px-4 py-2 text-sm font-semibold text-secondary-content shadow-xs" },
-              { "label": "Preview", "class": "rounded-md border border-base-300 bg-base-100 px-4 py-2 text-sm font-semibold text-base-content" },
-              { "label": "Delete", "class": "rounded-md bg-error px-4 py-2 text-sm font-semibold text-error-content" }
+              {
+                "label": "Automate",
+                "class": "rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-content shadow-xs"
+              },
+              {
+                "label": "Assign",
+                "class": "rounded-md bg-secondary px-4 py-2 text-sm font-semibold text-secondary-content shadow-xs"
+              },
+              {
+                "label": "Preview",
+                "class": "rounded-md border border-base-300 bg-base-100 px-4 py-2 text-sm font-semibold text-base-content"
+              },
+              {
+                "label": "Delete",
+                "class": "rounded-md bg-error px-4 py-2 text-sm font-semibold text-error-content"
+              }
+            ]
+          }
+        },
+        {
+          "id": "button-sizes-and-icons",
+          "title": "Button sizes and icon scale",
+          "description": "The canonical icon-size rows come from the Buttons chapter and are reused by icon-only buttons.",
+          "type": "button",
+          "tokens": [
+            "mp-icon-xs",
+            "mp-icon-sm",
+            "mp-icon-md",
+            "mp-icon-lg"
+          ],
+          "props": {
+            "buttons": [
+              {
+                "label": "XS row action",
+                "class": "inline-flex h-8 items-center justify-center rounded-md border border-base-300 bg-base-100 px-2.5 text-xs font-medium text-base-content hover:bg-base-200"
+              },
+              {
+                "label": "SM toolbar",
+                "class": "inline-flex h-8 items-center justify-center rounded-md border border-base-300 bg-base-100 px-3 text-xs font-medium text-base-content hover:bg-base-200"
+              },
+              {
+                "label": "MD default",
+                "class": "inline-flex h-10 items-center justify-center rounded-md bg-primary px-4 text-sm font-semibold text-primary-content hover:bg-primary/90"
+              },
+              {
+                "label": "LG onboarding",
+                "class": "inline-flex h-12 items-center justify-center rounded-md bg-primary px-5 text-base font-semibold text-primary-content hover:bg-primary/90"
+              }
+            ],
+            "iconSizes": [
+              {
+                "name": "xs",
+                "value": "0.875rem",
+                "class": "mp-icon-xs"
+              },
+              {
+                "name": "sm",
+                "value": "1rem",
+                "class": "mp-icon-sm"
+              },
+              {
+                "name": "md",
+                "value": "1.125rem",
+                "class": "mp-icon-md"
+              },
+              {
+                "name": "lg",
+                "value": "1.25rem",
+                "class": "mp-icon-lg"
+              }
             ]
           }
         }
@@ -210,12 +622,30 @@
           "title": "Sidebar items",
           "description": "Counts stay trailing and current state uses a primary tint.",
           "type": "navigation",
-          "tokens": ["--mp-color-primary", "--mp-color-base-200"],
+          "tokens": [
+            "--mp-color-primary",
+            "--mp-color-base-200"
+          ],
           "props": {
             "items": [
-              { "label": "Inbox", "count": "42", "href": "navigation", "class": "flex h-10 items-center rounded-lg bg-primary/10 px-3 text-sm font-medium text-primary" },
-              { "label": "Review", "count": "8", "href": "navigation", "class": "flex h-10 items-center rounded-lg px-3 text-sm font-medium text-base-content/75 hover:bg-base-200" },
-              { "label": "Automations", "count": "12", "href": "navigation", "class": "flex h-10 items-center rounded-lg px-3 text-sm font-medium text-base-content/75 hover:bg-base-200" }
+              {
+                "label": "Inbox",
+                "count": "42",
+                "href": "navigation",
+                "class": "flex h-10 items-center rounded-lg bg-primary/10 px-3 text-sm font-medium text-primary"
+              },
+              {
+                "label": "Review",
+                "count": "8",
+                "href": "navigation",
+                "class": "flex h-10 items-center rounded-lg px-3 text-sm font-medium text-base-content/75 hover:bg-base-200"
+              },
+              {
+                "label": "Automations",
+                "count": "12",
+                "href": "navigation",
+                "class": "flex h-10 items-center rounded-lg px-3 text-sm font-medium text-base-content/75 hover:bg-base-200"
+              }
             ]
           }
         }
@@ -232,12 +662,31 @@
           "title": "Mailbox queue table",
           "description": "Status badges and SLA values remain visible at default density.",
           "type": "table",
-          "tokens": ["--mp-color-base-300", "--mp-color-warning", "--mp-color-success"],
+          "tokens": [
+            "--mp-color-base-300",
+            "--mp-color-warning",
+            "--mp-color-success"
+          ],
           "props": {
             "rows": [
-              { "sender": "Nora Lee", "status": "Needs review", "sla": "38m", "badgeClass": "bg-warning/20 text-warning-content" },
-              { "sender": "Acme Ops", "status": "Automated", "sla": "Done", "badgeClass": "bg-success/20 text-success-content" },
-              { "sender": "Billing Team", "status": "Failed", "sla": "Retry", "badgeClass": "bg-error/15 text-error" }
+              {
+                "sender": "Nora Lee",
+                "status": "Needs review",
+                "sla": "38m",
+                "badgeClass": "bg-warning/20 text-warning-content"
+              },
+              {
+                "sender": "Acme Ops",
+                "status": "Automated",
+                "sla": "Done",
+                "badgeClass": "bg-success/20 text-success-content"
+              },
+              {
+                "sender": "Billing Team",
+                "status": "Failed",
+                "sla": "Retry",
+                "badgeClass": "bg-error/15 text-error"
+              }
             ]
           }
         }
@@ -254,12 +703,28 @@
           "title": "Scoped alerts",
           "description": "Errors stay until resolved; success can confirm and disappear.",
           "type": "feedback",
-          "tokens": ["--mp-color-info", "--mp-color-warning", "--mp-color-error"],
+          "tokens": [
+            "--mp-color-info",
+            "--mp-color-warning",
+            "--mp-color-error"
+          ],
           "props": {
             "alerts": [
-              { "title": "Rule ready to publish", "text": "Review routing conditions before enabling automation.", "class": "rounded-lg border border-info bg-info/10 p-4 text-info-content" },
-              { "title": "SLA risk detected", "text": "Eight messages need owner review within one hour.", "class": "rounded-lg border border-warning bg-warning/15 p-4 text-warning-content" },
-              { "title": "Sync failed", "text": "Reconnect the mailbox before running this workflow again.", "class": "rounded-lg border border-error bg-error/10 p-4 text-error" }
+              {
+                "title": "Rule ready to publish",
+                "text": "Review routing conditions before enabling automation.",
+                "class": "rounded-lg border border-info bg-info/10 p-4 text-info-content"
+              },
+              {
+                "title": "SLA risk detected",
+                "text": "Eight messages need owner review within one hour.",
+                "class": "rounded-lg border border-warning bg-warning/15 p-4 text-warning-content"
+              },
+              {
+                "title": "Sync failed",
+                "text": "Reconnect the mailbox before running this workflow again.",
+                "class": "rounded-lg border border-error bg-error/10 p-4 text-error"
+              }
             ]
           }
         }
