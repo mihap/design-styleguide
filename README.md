@@ -8,6 +8,40 @@ Appendix sidecars live in [`design-system-blueprint-appendices/`](design-system-
 
 ---
 
+## Quickstart
+
+Run the validated MailPilot example:
+
+```bash
+node templates/validators/validate-all.mjs examples/mailpilot-design-guide
+open examples/mailpilot-design-guide/demo/index.html
+```
+
+Create a new guide workspace:
+
+```bash
+node scripts/create-guide.mjs "Acme Inbox" --examples
+```
+
+After the generated markdown is filled from user direction or source material, run the production workflow:
+
+```bash
+node scripts/merge-appendices.mjs examples/acme-inbox-design-guide
+node scripts/build-tailwind-export.mjs examples/acme-inbox-design-guide --build
+node scripts/build-demo.mjs examples/acme-inbox-design-guide
+node scripts/prepare-review.mjs examples/acme-inbox-design-guide
+node templates/validators/validate-all.mjs examples/acme-inbox-design-guide
+```
+
+Run a smoke test for the tooling:
+
+```bash
+node scripts/smoke-test.mjs
+node scripts/smoke-test.mjs --full
+```
+
+---
+
 ## What this is (and what it isn't)
 
 **It is** a structured skeleton — tables, headings, and section ordering — for documenting modern UI systems. Every cell that requires a design decision is marked with a `[placeholder]`.

@@ -47,3 +47,12 @@ Writes `review/review-packet.md` for an independent reviewer or review subagent.
 ```bash
 node templates/validators/validate-all.mjs examples/product-name-design-guide
 ```
+
+## Smoke test
+
+```bash
+node scripts/smoke-test.mjs
+node scripts/smoke-test.mjs --full
+```
+
+The default smoke test avoids package installation and checks scaffolding plus guide/demo validation. The full smoke test also installs/builds the MailPilot Tailwind export and runs the full quality gate.
