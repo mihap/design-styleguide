@@ -12,7 +12,6 @@ This folder contains self-contained sidecar appendices for `design-system-bluepr
 ## Coverage Rules
 
 - Appendices exist for chapters `02–12` only.
-- `13-quick-reference.md` stays derived-only and has no appendix by default.
 - Every appendix includes `Scope`, `Best Practices by Blueprint Section`, `DO`, `DON'T`, and `Local Decisions Required`.
 
 ## Validation Rules

@@ -10,13 +10,14 @@ If you are unsure what the user wants done, ask. The single most damaging failur
 
 - The files in `design-system-blueprint/` are **templates**, not a finished styleguide. Every value in square brackets (`[value]`, `[rem]`, `[token]`, `[Usage]`, `[Notes]`) is an unfilled slot.
 - The structure (file order, section headings, table columns, row order) is the deliverable's value. **Do not restructure** unless explicitly asked.
-- The blueprint assumes a **Tailwind CSS + DaisyUI-style token** stack. CSS variable names follow DaisyUI conventions (`--color-base-100`, `--color-primary`, `--color-primary-content`, `--radius-field`, `--radius-box`, `--radius-selector`, `--size-field`, `--border`, `--depth`, `--noise`). The `Tailwind` column in tables expects utility classes (e.g. `px-4`, `text-base`, `rounded-lg`).
-- Sizes are **rem** (spacing, font sizes, radii); border/ring/divider widths are **px** (Tailwind hairline convention); line heights are **unitless**; letter spacing is **em**; durations are **ms**. Convert if the user supplies px for sizes; preserve px for hairlines.
+- The blueprint assumes **Tailwind CSS utility conventions only**. Do not introduce non-Tailwind component, runtime, or token-framework assumptions unless the user's source system explicitly uses them.
+- CSS custom properties are generic design tokens here. Token names are project-defined; do not force framework-specific token names into the blueprint.
+- Sizes are **rem** or declared tokens for spacing, font sizes, and radii; border/ring/divider widths are **px**; line heights are **unitless**; letter spacing is **em**; durations are **ms**; opacity/depth/noise-style values are **unitless numbers**. Convert supplied px sizes to rem at a 16px base unless they are Tailwind-style hairlines.
 
 ### Appendix Sidecars
 
 - Best-practice appendices live in `design-system-blueprint-appendices/`, never inside `design-system-blueprint/`.
-- Appendix sidecars currently supplement chapters `02–12` only. `13-quick-reference.md` stays appendix-free unless the user explicitly asks for it.
+- Appendix sidecars supplement chapters `02–12` only.
 - Final appendix files should be self-contained operational guidance. Strip source maps, evidence ledgers, BP IDs, citation links, and source-corpus references before calling the work done.
 - If an appendix rule cannot stand on its own, rewrite it or move the uncertainty into `Local Decisions Required` instead of inventing filler guidance.
 - Appendix markdown is excluded from placeholder-bracket validation intended for blueprint templates.
@@ -28,7 +29,7 @@ If you are unsure what the user wants done, ask. The single most damaging failur
 ### "Fill in this blueprint" (no source material given)
 
 **Stop and ask** for one of:
-1. A `tailwind.config.*` / theme CSS / DaisyUI theme block to extract from.
+1. A `tailwind.config.*`, theme CSS, design-token file, or token table to extract from.
 2. A reference design system or design file (Figma, brand guide).
 3. Explicit instructions to draft opinionated defaults and label them as drafts.
 
@@ -39,20 +40,20 @@ Never silently invent token values, font choices, principles, or do/don't rules.
 When the user supplies tokens, configs, or an existing styleguide:
 
 1. Map their values to the placeholders **without changing the table shape**.
-2. Use rem for sizes (spacing, font sizes, radii); convert px → rem at 16px base unless told otherwise. Keep border/ring/divider widths in px.
-3. If the source omits a value the blueprint asks for (e.g. they have no `Display` heading size), leave the placeholder, mark with `[—]`, or surface it as a question — don't fabricate.
-4. Keep `13-quick-reference.md` aligned with §02 / §03 / §05 — it's a derived view; both must agree.
+2. Use rem for spacing, font sizes, and radii; convert px → rem at 16px base unless told otherwise. Keep border/ring/divider widths in px.
+3. If the source omits a value the blueprint asks for, leave the placeholder for unfinished work, use plain `—` for intentional not-applicable cells, or surface it as a question. Never use `[—]` in completed work.
+4. Keep source chapters aligned with downstream references: colors in `02`, typography in `03`, spacing in `04`, radius in `05`, elevation in `06`, and component applications in `07–12`.
 
 ### "Document our existing system"
 
-1. Read `tailwind.config.*`, theme CSS, and any component library entry points first.
-2. Extract the actual values into §02–§06.
-3. Only after tokens are recorded, fill in component sections (§07–§12) by reading the components themselves.
+1. Read `tailwind.config.*`, theme CSS, design-token files, and component implementation entry points first.
+2. Extract the actual values into `02–06`.
+3. Only after tokens are recorded, fill in component sections (`07–12`) by reading the components themselves.
 4. Quote the source file paths in your final summary so the user can verify.
 
 ### "Adapt to non-Tailwind stack"
 
-Rename the `Tailwind` column header (to `Class`, `Token`, `Variable`, etc.). Don't delete the column. Don't reshape rows. The structure must remain intact for cross-team familiarity.
+Confirm the intended structural conversion first. If approved, rename the `Tailwind` column header (to `Class`, `Token`, `Variable`, etc.). Don't delete the column. Don't reshape rows unless the user explicitly asks.
 
 ---
 
@@ -60,14 +61,15 @@ Rename the `Tailwind` column header (to `Class`, `Token`, `Variable`, etc.). Don
 
 | Rule                                                                                            | Why                                                                |
 | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| Preserve file numbering and order.                                                              | Files reference each other by number.                              |
+| Preserve file numbering and order unless explicitly asked to change them.                       | Files reference each other by number.                              |
 | Preserve table column order and count.                                                          | Downstream tooling and reviewers depend on it.                     |
 | Preserve heading levels and section titles.                                                     | The blueprint is read across systems; titles are stable anchors.   |
-| Use `—` for "not applicable" cells, never blanks.                                               | Blanks are ambiguous between "skipped" and "intentionally empty".  |
+| Use `—` for "not applicable" cells, never blanks and never `[—]`.                              | Blanks are ambiguous and bracketed values look unfinished.          |
 | Replace placeholders in place; never wrap them.                                                 | `[rem]` becomes `0.25rem`, not `[0.25rem]`.                        |
-| Token names must match across files.                                                            | If §13 uses `--color-primary`, §07 must too.                       |
+| Token names must match across files.                                                            | If `02` defines a color token, component chapters must use that exact name. |
 | Keep prose to one short sentence per cell.                                                      | The blueprint's value is scannability.                             |
-| Use `rem` for sizes, `px` for border/ring/divider widths, unitless for line height, `em` for letter spacing, `ms` for transitions. | Consistency with Tailwind's conventions.                           |
+| Use Tailwind unit conventions: rem for sizes, px for hairlines, unitless for line height, em for letter spacing, ms for transitions. | Consistency with Tailwind's conventions.                           |
+| Do not introduce non-Tailwind framework assumptions unless the user supplies them.              | The blueprint is component-framework-agnostic.                     |
 | Don't add or remove files in `design-system-blueprint/` without explicit instruction.           | The numbered blueprint structure is the contract.                  |
 | Filename slug and chapter title may differ; the slug is a stable internal anchor, the title is the human-facing heading. | E.g. `04-spacing-system.md` slug ↔ "Layout & Spacing" title.       |
 
@@ -77,16 +79,15 @@ Rename the `Tailwind` column header (to `Class`, `Token`, `Variable`, etc.). Don
 
 When you change anything, check these still hold:
 
-1. **Color tokens** declared in `02-color-system.md` must appear (by the same name) in:
-   - `13-quick-reference.md` (`:root` block + Color Quick Reference table)
-   - `07-component-states.md` (every state token)
-   - `09-buttons.md`, `10-navigation.md`, `11-tables-data-display.md`, `12-feedback-alerts.md` where those chapters reference color-driven treatments.
-2. **Type scale** in `03-typography.md` must match the Typography Quick Reference in `13-quick-reference.md`.
-3. **Radius scale** in `05-border-radius.md` must match `--radius-*` declarations in `13-quick-reference.md`.
-4. **Scale-typed values**: spacing values referenced in `08-form-elements.md`, `09-buttons.md`, `10-navigation.md`, `11-tables-data-display.md`, and `12-feedback-alerts.md` must come from `04-spacing-system.md`; typography values (size, weight, line height) must come from `03-typography.md`; icon sizes must come from a declared icon scale; color tokens must come from `02-color-system.md`. No raw rem values outside the declared scales.
-5. **Philosophy constraints** in `01-design-philosophy.md` should not be contradicted later. If §01 says "borders, not shadows", §06 should default to borders for elevation.
-6. **Shared interaction treatment** should stay consistent across `07-component-states.md`, `09-buttons.md`, `10-navigation.md`, and `11-tables-data-display.md`. If focus, active, or selected behavior changes in one, sweep the others.
-7. **Cover metadata** in `00-cover.md` (theme name, font, framework, color format) must match what the rest of the document actually uses.
+1. **Color tokens** declared in `02-color-system.md` must be the only color tokens referenced in `07–12` where those chapters reference color-driven treatments.
+2. **Type scale** in `03-typography.md` must supply typography values referenced elsewhere: size, weight, line height, and letter spacing.
+3. **Spacing values** referenced in `08-form-elements.md`, `09-buttons.md`, `10-navigation.md`, `11-tables-data-display.md`, and `12-feedback-alerts.md` must come from `04-spacing-system.md` where applicable.
+4. **Radius values** must come from `05-border-radius.md`; **shadow/elevation values** must come from `06-shadows-elevation.md`.
+5. **Button icon sizes** are declared in `09-buttons.md` → `Button Sizes` as the `Size | Icon Size | Usage` table with `xs`, `sm`, `md (default)`, and `lg` rows. Keep icon-only button sizes aligned with those rows; do not create a separate global icon scale unless the user asks.
+6. **Scale-typed values** should not appear as raw rem values outside their declaring scale, except where the table itself is defining that scale.
+7. **Philosophy constraints** in `01-design-philosophy.md` should not be contradicted later. If `01` says "borders, not shadows", `06` should default to borders for elevation.
+8. **Shared interaction treatment** should stay consistent across `07-component-states.md`, `09-buttons.md`, `10-navigation.md`, and `11-tables-data-display.md`. If focus, active, or selected behavior changes in one, sweep the others.
+9. **Cover metadata** in `00-cover.md` (theme name, font, styling stack, color format) must match what the rest of the document actually uses.
 
 When the user changes one token, do a **full sweep** rather than a single-file edit.
 
@@ -97,13 +98,14 @@ When the user changes one token, do a **full sweep** rather than a single-file e
 Run through this before telling the user a fill-in is complete:
 
 - [ ] No `[` characters remain in any blueprint file (search the whole `design-system-blueprint/` folder).
-- [ ] Every CSS variable referenced in §07–§12 is declared in §02 and §13.
+- [ ] No completed cell contains `[—]`; intentional not-applicable cells use plain `—`.
+- [ ] Every referenced token is declared in its source chapter: colors in `02`, typography in `03`, spacing in `04`, radius in `05`, and elevation/shadow in `06`.
 - [ ] Every Tailwind utility referenced is real (not `[utility]`).
-- [ ] Sizes are rem; borders/rings/dividers are px; line heights unitless; letter spacing em; durations ms.
-- [ ] Cover (§00) metadata reflects the actual fills.
-- [ ] Quick Reference (§13) matches §02 (colors), §03 (typography), §05 (radius).
-- [ ] No table has gained or lost a column.
-- [ ] No unexpected file has been added or removed from the approved blueprint structure.
+- [ ] Sizes are rem or declared tokens; borders/rings/dividers are px; line heights unitless; letter spacing em; durations ms; opacity/depth/noise-style values unitless.
+- [ ] Cover (`00`) metadata reflects the actual fills.
+- [ ] No non-Tailwind framework assumptions were introduced unless the user supplied them explicitly.
+- [ ] No table has gained or lost a column unless the user explicitly requested that structural change.
+- [ ] No unexpected file has been added or removed from the approved blueprint structure (`00–12`).
 
 If you changed appendix sidecars, also check these:
 
@@ -130,13 +132,13 @@ The blueprint's voice is **direct, declarative, opinionated, and short**. When f
 
 | Request                                          | Right move                                                                                       |
 | ------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| "Add a new color"                                | Add it to §02 → §13 (`:root` + table) → reference in §07/§09/§10/§11/§12 wherever it applies.   |
-| "Add a new button variant"                       | Add row to §09 variants table → add states to §07 Primary/Secondary section.                     |
-| "Add a new navigation pattern"                   | Add it to §10 → align spacing with §04 and states with §07.                                      |
-| "Add a new table variant"                        | Add it to §11 → align spacing with §04 and typography with §03.                                  |
+| "Add a new color"                                | Add it to `02` → reference in `07`/`09`/`10`/`11`/`12` wherever it applies.                      |
+| "Add a new button variant"                       | Add row to `09` variants table → add states to `07` when state treatment changes.                |
+| "Add a new navigation pattern"                   | Add it to `10` → align spacing with `04` and states with `07`.                                   |
+| "Add a new table variant"                        | Add it to `11` → align spacing with `04` and typography with `03`.                               |
 | "Switch from light to dark mode"                 | New top-level theme; consider duplicating the blueprint or adding a parallel set of files. Ask first. |
-| "Convert to non-Tailwind"                        | Rename `Tailwind` column header globally. Don't reshape.                                         |
-| "Make it framework-agnostic"                     | Push back: the blueprint explicitly assumes Tailwind. Confirm the user wants a structural rewrite. |
+| "Convert to non-Tailwind"                        | Confirm the structural conversion, then rename `Tailwind` columns globally without reshaping rows unless asked. |
+| "Add another framework"                          | Ask for explicit source material and label framework-specific assumptions clearly.                |
 | "Generate a Figma export / Storybook / tokens.json" | Out of scope unless explicitly added. Confirm before doing it.                                |
 | "Shorten this"                                   | Tighten prose, never delete table rows or sections.                                              |
 
@@ -146,5 +148,6 @@ The blueprint's voice is **direct, declarative, opinionated, and short**. When f
 
 - `README.md` — human-facing intro. Update if the blueprint's structure or framework assumptions change.
 - `AGENTS.md` — this file. Update when invariants change.
+- `LICENSE` — private license notice. Update only when ownership or distribution terms change.
 
 If you change the blueprint's structure (rare, only on user instruction), update both `README.md` and `AGENTS.md` in the same change.

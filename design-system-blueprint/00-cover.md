@@ -9,7 +9,7 @@
 | Document      | [Document name]                                  |
 | Theme         | [Theme name + mode]                              |
 | Primary Font  | [Primary typeface name]                          |
-| Framework     | [UI component framework + CSS framework]         |
+| Styling Stack | [CSS framework / styling approach]               |
 | Color Format  | [Color format — e.g. HEX / RGB / HSL / OKLCH]    |
 
 ---
@@ -28,4 +28,3 @@
 10. Navigation
 11. Tables & Data Display
 12. Feedback & Alerts
-13. Quick Reference
