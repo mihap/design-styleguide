@@ -1,0 +1,857 @@
+{
+  "files": {
+    "00-cover.md": {
+      "headings": [
+        {
+          "level": 1,
+          "title": "[Design System Name] Design System Guidelines"
+        },
+        {
+          "level": 2,
+          "title": "Contents"
+        }
+      ],
+      "tables": [
+        {
+          "headers": [
+            "Field",
+            "Value"
+          ],
+          "rowCount": 5
+        }
+      ]
+    },
+    "01-design-philosophy.md": {
+      "headings": [
+        {
+          "level": 1,
+          "title": "1. Design Philosophy"
+        },
+        {
+          "level": 2,
+          "title": "Core Principles"
+        },
+        {
+          "level": 2,
+          "title": "The [Theme Name] Theme"
+        },
+        {
+          "level": 2,
+          "title": "Design Constraints"
+        }
+      ],
+      "tables": []
+    },
+    "02-color-system.md": {
+      "headings": [
+        {
+          "level": 1,
+          "title": "2. Color System"
+        },
+        {
+          "level": 2,
+          "title": "Primary Colors"
+        },
+        {
+          "level": 2,
+          "title": "Base Colors"
+        },
+        {
+          "level": 2,
+          "title": "Neutral Colors"
+        },
+        {
+          "level": 2,
+          "title": "Semantic Colors"
+        },
+        {
+          "level": 2,
+          "title": "Semantic Content Colors"
+        },
+        {
+          "level": 2,
+          "title": "Color Usage Guidelines"
+        },
+        {
+          "level": 3,
+          "title": "Text Colors"
+        },
+        {
+          "level": 3,
+          "title": "Background Colors"
+        },
+        {
+          "level": 3,
+          "title": "Border Colors"
+        }
+      ],
+      "tables": [
+        {
+          "headers": [
+            "Color",
+            "Value",
+            "CSS Variable",
+            "Usage"
+          ],
+          "rowCount": 6
+        },
+        {
+          "headers": [
+            "Color",
+            "Value",
+            "CSS Variable",
+            "Usage"
+          ],
+          "rowCount": 4
+        },
+        {
+          "headers": [
+            "Color",
+            "Value",
+            "CSS Variable",
+            "Usage"
+          ],
+          "rowCount": 2
+        },
+        {
+          "headers": [
+            "Color",
+            "Value",
+            "CSS Variable",
+            "Usage",
+            "Content Color"
+          ],
+          "rowCount": 4
+        },
+        {
+          "headers": [
+            "Color",
+            "Value",
+            "CSS Variable",
+            "Usage"
+          ],
+          "rowCount": 4
+        },
+        {
+          "headers": [
+            "Context",
+            "Color",
+            "Opacity / Variant"
+          ],
+          "rowCount": 8
+        },
+        {
+          "headers": [
+            "Context",
+            "Color",
+            "Notes"
+          ],
+          "rowCount": 7
+        },
+        {
+          "headers": [
+            "Context",
+            "Color",
+            "Width"
+          ],
+          "rowCount": 6
+        }
+      ]
+    },
+    "03-typography.md": {
+      "headings": [
+        {
+          "level": 1,
+          "title": "3. Typography"
+        },
+        {
+          "level": 2,
+          "title": "Font Stack"
+        },
+        {
+          "level": 2,
+          "title": "Font Weights"
+        },
+        {
+          "level": 2,
+          "title": "Type Scale"
+        },
+        {
+          "level": 2,
+          "title": "Line Height Guidelines"
+        },
+        {
+          "level": 2,
+          "title": "Letter Spacing"
+        },
+        {
+          "level": 2,
+          "title": "Paragraph Spacing"
+        }
+      ],
+      "tables": [
+        {
+          "headers": [
+            "Weight",
+            "Name",
+            "CSS",
+            "Usage"
+          ],
+          "rowCount": 3
+        },
+        {
+          "headers": [
+            "Name",
+            "Size",
+            "Weight",
+            "Line Height",
+            "Tailwind",
+            "Usage"
+          ],
+          "rowCount": 10
+        },
+        {
+          "headers": [
+            "Category",
+            "Line Height",
+            "Tailwind",
+            "Usage"
+          ],
+          "rowCount": 5
+        },
+        {
+          "headers": [
+            "Category",
+            "Value",
+            "Tailwind",
+            "Usage"
+          ],
+          "rowCount": 5
+        },
+        {
+          "headers": [
+            "Element",
+            "Margin Bottom",
+            "Notes"
+          ],
+          "rowCount": 7
+        }
+      ]
+    },
+    "04-spacing-system.md": {
+      "headings": [
+        {
+          "level": 1,
+          "title": "4. Layout & Spacing"
+        },
+        {
+          "level": 2,
+          "title": "Spacing Scale"
+        },
+        {
+          "level": 2,
+          "title": "Applied Spacing Reference"
+        },
+        {
+          "level": 3,
+          "title": "Button Padding"
+        },
+        {
+          "level": 3,
+          "title": "Input Field Spacing"
+        },
+        {
+          "level": 3,
+          "title": "Surface Padding"
+        },
+        {
+          "level": 3,
+          "title": "Card Spacing"
+        },
+        {
+          "level": 3,
+          "title": "Page Layout Spacing"
+        }
+      ],
+      "tables": [
+        {
+          "headers": [
+            "Token",
+            "Value",
+            "Tailwind",
+            "Common Uses"
+          ],
+          "rowCount": 16
+        },
+        {
+          "headers": [
+            "Size",
+            "Padding Y",
+            "Padding X",
+            "Height",
+            "Font Size"
+          ],
+          "rowCount": 4
+        },
+        {
+          "headers": [
+            "Size",
+            "Padding Y",
+            "Padding X",
+            "Height",
+            "Font Size"
+          ],
+          "rowCount": 3
+        },
+        {
+          "headers": [
+            "Surface",
+            "Padding",
+            "Gap (internal)",
+            "Usage"
+          ],
+          "rowCount": 4
+        },
+        {
+          "headers": [
+            "Variant",
+            "Padding",
+            "Gap (internal)",
+            "Usage"
+          ],
+          "rowCount": 4
+        },
+        {
+          "headers": [
+            "Context",
+            "Value",
+            "Notes"
+          ],
+          "rowCount": 10
+        }
+      ]
+    },
+    "05-border-radius.md": {
+      "headings": [
+        {
+          "level": 1,
+          "title": "5. Border Radius"
+        },
+        {
+          "level": 2,
+          "title": "Border Radius Scale"
+        },
+        {
+          "level": 2,
+          "title": "Component-Specific Radii"
+        }
+      ],
+      "tables": [
+        {
+          "headers": [
+            "Token",
+            "Value",
+            "Tailwind",
+            "CSS Variable",
+            "Usage"
+          ],
+          "rowCount": 8
+        },
+        {
+          "headers": [
+            "Component",
+            "Radius",
+            "Notes"
+          ],
+          "rowCount": 10
+        }
+      ]
+    },
+    "06-shadows-elevation.md": {
+      "headings": [
+        {
+          "level": 1,
+          "title": "6. Shadows & Elevation"
+        },
+        {
+          "level": 2,
+          "title": "Shadow Scale"
+        },
+        {
+          "level": 2,
+          "title": "Elevation Guidelines"
+        }
+      ],
+      "tables": [
+        {
+          "headers": [
+            "Level",
+            "Tailwind",
+            "CSS Value",
+            "Usage"
+          ],
+          "rowCount": 6
+        },
+        {
+          "headers": [
+            "Component",
+            "Elevation Method",
+            "Notes"
+          ],
+          "rowCount": 8
+        }
+      ]
+    },
+    "07-component-states.md": {
+      "headings": [
+        {
+          "level": 1,
+          "title": "7. Component States"
+        },
+        {
+          "level": 2,
+          "title": "State Overview"
+        },
+        {
+          "level": 2,
+          "title": "Primary Button States"
+        },
+        {
+          "level": 2,
+          "title": "Secondary / Outline Button States"
+        },
+        {
+          "level": 2,
+          "title": "Input Field States"
+        },
+        {
+          "level": 2,
+          "title": "Focus Ring Specifications"
+        },
+        {
+          "level": 2,
+          "title": "Checkbox & Radio States"
+        },
+        {
+          "level": 2,
+          "title": "Toggle / Switch States"
+        }
+      ],
+      "tables": [
+        {
+          "headers": [
+            "State",
+            "Description",
+            "Visual Treatment"
+          ],
+          "rowCount": 9
+        },
+        {
+          "headers": [
+            "State",
+            "Background",
+            "Text",
+            "Border",
+            "Notes"
+          ],
+          "rowCount": 6
+        },
+        {
+          "headers": [
+            "State",
+            "Background",
+            "Text",
+            "Border",
+            "Notes"
+          ],
+          "rowCount": 5
+        },
+        {
+          "headers": [
+            "State",
+            "Background",
+            "Border",
+            "Text",
+            "Notes"
+          ],
+          "rowCount": 9
+        },
+        {
+          "headers": [
+            "Property",
+            "Value",
+            "CSS"
+          ],
+          "rowCount": 5
+        },
+        {
+          "headers": [
+            "State",
+            "Box Background",
+            "Border",
+            "Check / Dot",
+            "Label"
+          ],
+          "rowCount": 8
+        },
+        {
+          "headers": [
+            "State",
+            "Track",
+            "Thumb",
+            "Notes"
+          ],
+          "rowCount": 8
+        }
+      ]
+    },
+    "08-form-elements.md": {
+      "headings": [
+        {
+          "level": 1,
+          "title": "8. Form Elements & Selection Controls"
+        },
+        {
+          "level": 2,
+          "title": "Form Layout Guidelines"
+        },
+        {
+          "level": 2,
+          "title": "Label Styling"
+        },
+        {
+          "level": 2,
+          "title": "Helper & Error Text"
+        },
+        {
+          "level": 2,
+          "title": "Input Variations"
+        },
+        {
+          "level": 2,
+          "title": "Selection Controls"
+        },
+        {
+          "level": 2,
+          "title": "Control Group Layout"
+        }
+      ],
+      "tables": [
+        {
+          "headers": [
+            "Aspect",
+            "Specification",
+            "Notes"
+          ],
+          "rowCount": 8
+        },
+        {
+          "headers": [
+            "Property",
+            "Value",
+            "Notes"
+          ],
+          "rowCount": 5
+        },
+        {
+          "headers": [
+            "Type",
+            "Font Size",
+            "Color",
+            "Icon"
+          ],
+          "rowCount": 4
+        },
+        {
+          "headers": [
+            "Type",
+            "Control Anatomy",
+            "Supporting Element / Rule",
+            "Notes"
+          ],
+          "rowCount": 9
+        },
+        {
+          "headers": [
+            "Control",
+            "Control Anatomy",
+            "Label Placement",
+            "Hit Area / Sizing",
+            "Notes"
+          ],
+          "rowCount": 5
+        },
+        {
+          "headers": [
+            "Context",
+            "Gap",
+            "Layout Rule",
+            "Notes"
+          ],
+          "rowCount": 5
+        }
+      ]
+    },
+    "09-buttons.md": {
+      "headings": [
+        {
+          "level": 1,
+          "title": "9. Buttons"
+        },
+        {
+          "level": 2,
+          "title": "Button Variants"
+        },
+        {
+          "level": 2,
+          "title": "Button Sizes"
+        },
+        {
+          "level": 2,
+          "title": "Button with Icons"
+        },
+        {
+          "level": 2,
+          "title": "Icon-Only Button Sizes"
+        }
+      ],
+      "tables": [
+        {
+          "headers": [
+            "Variant",
+            "Background",
+            "Text",
+            "Border",
+            "Usage"
+          ],
+          "rowCount": 6
+        },
+        {
+          "headers": [
+            "Size",
+            "Icon Size",
+            "Usage"
+          ],
+          "rowCount": 4
+        },
+        {
+          "headers": [
+            "Pattern",
+            "Icon Placement",
+            "Gap",
+            "Usage Example"
+          ],
+          "rowCount": 3
+        },
+        {
+          "headers": [
+            "Size",
+            "Dimensions",
+            "Icon Size",
+            "Padding"
+          ],
+          "rowCount": 4
+        }
+      ]
+    },
+    "10-navigation.md": {
+      "headings": [
+        {
+          "level": 1,
+          "title": "10. Navigation"
+        },
+        {
+          "level": 2,
+          "title": "Navigation Patterns"
+        },
+        {
+          "level": 2,
+          "title": "Navigation Item Anatomy"
+        },
+        {
+          "level": 2,
+          "title": "Navigation States"
+        },
+        {
+          "level": 2,
+          "title": "Responsive Navigation Behavior"
+        }
+      ],
+      "tables": [
+        {
+          "headers": [
+            "Pattern",
+            "Usage",
+            "Desktop Layout",
+            "Mobile Layout",
+            "Notes"
+          ],
+          "rowCount": 5
+        },
+        {
+          "headers": [
+            "Element",
+            "Specification",
+            "Notes"
+          ],
+          "rowCount": 8
+        },
+        {
+          "headers": [
+            "State",
+            "Background",
+            "Text / Icon",
+            "Indicator",
+            "Notes"
+          ],
+          "rowCount": 6
+        },
+        {
+          "headers": [
+            "Context",
+            "Fallback Rule",
+            "Notes"
+          ],
+          "rowCount": 6
+        }
+      ]
+    },
+    "11-tables-data-display.md": {
+      "headings": [
+        {
+          "level": 1,
+          "title": "11. Tables & Data Display"
+        },
+        {
+          "level": 2,
+          "title": "Table Anatomy"
+        },
+        {
+          "level": 2,
+          "title": "Density & Spacing"
+        },
+        {
+          "level": 2,
+          "title": "Row & Cell States"
+        },
+        {
+          "level": 2,
+          "title": "Data States"
+        },
+        {
+          "level": 2,
+          "title": "Responsive Data Display"
+        }
+      ],
+      "tables": [
+        {
+          "headers": [
+            "Element",
+            "Specification",
+            "Notes"
+          ],
+          "rowCount": 9
+        },
+        {
+          "headers": [
+            "Density",
+            "Row Height",
+            "Cell Padding X",
+            "Cell Padding Y",
+            "Usage"
+          ],
+          "rowCount": 3
+        },
+        {
+          "headers": [
+            "State",
+            "Background",
+            "Border / Divider",
+            "Text",
+            "Notes"
+          ],
+          "rowCount": 6
+        },
+        {
+          "headers": [
+            "State",
+            "Message / Layout Rule",
+            "Supporting Element",
+            "Action Rule",
+            "Notes"
+          ],
+          "rowCount": 5
+        },
+        {
+          "headers": [
+            "Context",
+            "Fallback Rule",
+            "Notes"
+          ],
+          "rowCount": 6
+        }
+      ]
+    },
+    "12-feedback-alerts.md": {
+      "headings": [
+        {
+          "level": 1,
+          "title": "12. Feedback & Alerts"
+        },
+        {
+          "level": 2,
+          "title": "Alert Variants"
+        },
+        {
+          "level": 2,
+          "title": "Alert Anatomy"
+        },
+        {
+          "level": 2,
+          "title": "Toast Notifications"
+        },
+        {
+          "level": 2,
+          "title": "Badge Styles"
+        }
+      ],
+      "tables": [
+        {
+          "headers": [
+            "Variant",
+            "Background",
+            "Border",
+            "Icon",
+            "Usage"
+          ],
+          "rowCount": 5
+        },
+        {
+          "headers": [
+            "Element",
+            "Specification",
+            "Notes"
+          ],
+          "rowCount": 7
+        },
+        {
+          "headers": [
+            "Property",
+            "Value",
+            "Notes"
+          ],
+          "rowCount": 8
+        },
+        {
+          "headers": [
+            "Variant",
+            "Background",
+            "Text",
+            "Usage"
+          ],
+          "rowCount": 7
+        }
+      ]
+    }
+  }
+}

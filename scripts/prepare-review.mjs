@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+import fs from 'node:fs';
+import path from 'node:path';
+
+const repoRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
+const args = process.argv.slice(2);
+const guideRoot = path.resolve(args.find((arg) => !arg.startsWith('-')) || '');
+
+function usage() {
+  console.log(`Usage: node scripts/prepare-review.mjs <guide-dir>\n\nWrites <guide-dir>/review/review-packet.md for an independent reviewer.`);
+}
+
+if (!guideRoot || args.includes('--help') || args.includes('-h')) {
+  usage();
+  process.exit(guideRoot ? 0 : 1);
+}
+if (!fs.existsSync(guideRoot)) {
+  console.error(`Guide directory does not exist: ${guideRoot}`);
+  process.exit(1);
+}
+
+const reviewDir = path.join(guideRoot, 'review');
+fs.mkdirSync(reviewDir, { recursive: true });
+const prompt = fs.readFileSync(path.join(repoRoot, 'templates', 'review', 'guide-review-prompt.md'), 'utf8').replaceAll('{guide-dir}', path.relative(repoRoot, guideRoot));
+const files = fs.readdirSync(guideRoot)
+  .filter((file) => /^\d{2}-.*\.md$/.test(file) || file === 'manifest.json')
+  .sort();
+const packet = `${prompt}\n\n---\n\n## Files to Review\n\n${files.map((file) => `- ${path.join(path.relative(repoRoot, guideRoot), file)}`).join('\n')}\n\n## Recommended Commands\n\n\`\`\`bash\nnode templates/validators/validate-all.mjs ${path.relative(repoRoot, guideRoot)}\nnode ${path.join(path.relative(repoRoot, guideRoot), 'scripts/validate-all.mjs')} ${path.relative(repoRoot, guideRoot)}\n\`\`\`\n`;
+fs.writeFileSync(path.join(reviewDir, 'review-packet.md'), packet);
+console.log(`Wrote ${path.join(reviewDir, 'review-packet.md')}`);

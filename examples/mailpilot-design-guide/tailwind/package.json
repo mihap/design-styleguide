@@ -1,0 +1,14 @@
+{
+  "name": "mailpilot-design-guide-tailwind-export",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tailwindcss -i ./src/input.css -o ./dist/design-guide.css --minify",
+    "build:dev": "tailwindcss -i ./src/input.css -o ./dist/design-guide.css"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "latest",
+    "tailwindcss": "latest"
+  }
+}

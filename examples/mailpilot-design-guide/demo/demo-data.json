@@ -1,0 +1,269 @@
+{
+  "guideName": "MailPilot Design System Guidelines",
+  "version": "Version 0.1",
+  "description": "A colorful Tailwind-oriented design system for SMB shared-mailbox automation, inspired by Notion's clarity and Stripe's precision.",
+  "tailwindExport": "../tailwind/dist/design-guide.css",
+  "sections": [
+    {
+      "id": "philosophy",
+      "title": "Design Philosophy",
+      "sourceChapter": "01-design-philosophy.md",
+      "description": "Core experience principles expressed as product UI cards.",
+      "examples": [
+        {
+          "id": "principles",
+          "title": "Principle cards",
+          "description": "Principles use restrained surfaces with colorful accents only where workflow meaning exists.",
+          "type": "surface",
+          "tokens": ["--mp-color-base-100", "--mp-color-primary"],
+          "props": {
+            "cards": [
+              { "title": "Context before automation", "text": "Show the message, sender, workflow, and next action before running rules.", "class": "rounded-xl border border-base-300 bg-base-100 p-4 shadow-xs" },
+              { "title": "Color means workflow state", "text": "Queue health, urgency, ownership, and automation status receive color before decoration does.", "class": "rounded-xl border border-primary bg-primary/10 p-4 shadow-xs" }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "color",
+      "title": "Color System",
+      "sourceChapter": "02-color-system.md",
+      "description": "Prism Light colors keep mailbox surfaces calm while making automation status visible.",
+      "examples": [
+        {
+          "id": "brand-swatches",
+          "title": "Brand and semantic swatches",
+          "description": "Primary, secondary, accent, and semantic colors map to action and workflow meaning.",
+          "type": "color",
+          "tokens": ["--mp-color-primary", "--mp-color-secondary", "--mp-color-accent", "--mp-color-success"],
+          "props": {
+            "swatches": [
+              { "name": "Primary", "token": "--mp-color-primary", "class": "bg-primary" },
+              { "name": "Secondary", "token": "--mp-color-secondary", "class": "bg-secondary" },
+              { "name": "Accent", "token": "--mp-color-accent", "class": "bg-accent" },
+              { "name": "Success", "token": "--mp-color-success", "class": "bg-success" }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "typography",
+      "title": "Typography",
+      "sourceChapter": "03-typography.md",
+      "description": "Inter provides crisp scanning for inbox rows, setup flows, and automation explanations.",
+      "examples": [
+        {
+          "id": "type-scale",
+          "title": "Type scale",
+          "description": "Large headings are reserved for setup and empty states; app surfaces use compact body text.",
+          "type": "typography",
+          "tokens": ["Inter", "text-4xl", "text-sm"],
+          "props": {
+            "samples": [
+              { "label": "H1", "text": "Automate the shared inbox", "class": "text-4xl font-semibold tracking-tight" },
+              { "label": "Body", "text": "Route urgent messages, draft replies, and keep owners accountable.", "class": "text-sm leading-6 text-base-content/75" },
+              { "label": "Tiny metadata", "text": "SLA due in 38m", "class": "text-xs font-medium tracking-wide text-warning-content" }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "spacing",
+      "title": "Layout and Spacing",
+      "sourceChapter": "04-spacing-system.md",
+      "description": "A 0.25rem base creates predictable density across inbox rows and automation review screens.",
+      "examples": [
+        {
+          "id": "spacing-scale",
+          "title": "Spacing rhythm",
+          "description": "The working rhythm centers around token 3 and token 4.",
+          "type": "spacing",
+          "tokens": ["0.25rem", "0.75rem", "1rem", "1.5rem"],
+          "props": {
+            "items": [
+              { "name": "Token 2", "value": "0.5rem", "class": "h-2 w-8" },
+              { "name": "Token 3", "value": "0.75rem", "class": "h-3 w-12" },
+              { "name": "Token 4", "value": "1rem", "class": "h-4 w-16" },
+              { "name": "Token 6", "value": "1.5rem", "class": "h-6 w-24" }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "radius",
+      "title": "Border Radius",
+      "sourceChapter": "05-border-radius.md",
+      "description": "Soft but restrained radius makes the system approachable without losing precision.",
+      "examples": [
+        {
+          "id": "radius-cards",
+          "title": "Radius scale in use",
+          "description": "Controls use md, cards use lg, and pills use full radius.",
+          "type": "surface",
+          "tokens": ["--mp-radius-md", "--mp-radius-lg", "--mp-radius-full"],
+          "props": {
+            "cards": [
+              { "title": "Input and button radius", "text": "0.5rem keeps controls compact and clear.", "class": "rounded-md border border-base-300 bg-base-100 p-4" },
+              { "title": "Card radius", "text": "0.75rem separates panels without feeling playful.", "class": "rounded-lg border border-base-300 bg-base-100 p-4" },
+              { "title": "Pill radius", "text": "Full radius is reserved for badges and filters.", "class": "rounded-full border border-primary bg-primary/10 p-4 text-primary" }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "elevation",
+      "title": "Shadows and Elevation",
+      "sourceChapter": "06-shadows-elevation.md",
+      "description": "Depth is border-first, with shadows reserved for floating surfaces.",
+      "examples": [
+        {
+          "id": "elevation-stack",
+          "title": "Elevation stack",
+          "description": "Cards stay quiet, while popovers and modals receive stronger depth.",
+          "type": "surface",
+          "tokens": ["shadow-xs", "shadow-md", "shadow-lg"],
+          "props": {
+            "cards": [
+              { "title": "Default card", "text": "Border-only surface for dashboard content.", "class": "rounded-lg border border-base-300 bg-base-100 p-4 shadow-none" },
+              { "title": "Popover", "text": "Medium shadow signals a floating menu.", "class": "rounded-lg border border-base-300 bg-base-100 p-4 shadow-md" },
+              { "title": "Modal", "text": "Large shadow supports blocking review.", "class": "rounded-xl border border-base-300 bg-base-100 p-4 shadow-lg" }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "states",
+      "title": "Component States",
+      "sourceChapter": "07-component-states.md",
+      "description": "States distinguish availability, selection, validation, and automation progress.",
+      "examples": [
+        {
+          "id": "button-states",
+          "title": "Action states",
+          "description": "Primary action states retain layout width and visible focus treatment.",
+          "type": "state",
+          "tokens": ["--mp-color-primary", "--mp-color-error", "focus:ring-2"],
+          "props": {
+            "states": [
+              { "label": "Default", "class": "rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-content" },
+              { "label": "Hover", "class": "rounded-md bg-primary/90 px-4 py-2 text-sm font-semibold text-primary-content" },
+              { "label": "Focused", "class": "rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-content ring-2 ring-primary ring-offset-2" },
+              { "label": "Disabled", "class": "cursor-not-allowed rounded-md bg-primary/45 px-4 py-2 text-sm font-semibold text-primary-content/70" }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "forms",
+      "title": "Forms and Selection Controls",
+      "sourceChapter": "08-form-elements.md",
+      "description": "Forms keep labels visible and place recovery close to the field.",
+      "examples": [
+        {
+          "id": "mailbox-form",
+          "title": "Mailbox settings form",
+          "description": "Fields, helper text, and toggles use the shared control rhythm.",
+          "type": "form",
+          "tokens": ["rounded-md", "focus:ring-2", "--mp-color-primary"],
+          "props": {}
+        }
+      ]
+    },
+    {
+      "id": "buttons",
+      "title": "Buttons",
+      "sourceChapter": "09-buttons.md",
+      "description": "Buttons communicate action priority and support the canonical icon-size rows.",
+      "examples": [
+        {
+          "id": "button-variants",
+          "title": "Button variants",
+          "description": "Primary is reserved for the recommended next action.",
+          "type": "button",
+          "tokens": ["--mp-color-primary", "--mp-color-secondary", "--mp-color-error"],
+          "props": {
+            "buttons": [
+              { "label": "Automate", "class": "rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-content shadow-xs" },
+              { "label": "Assign", "class": "rounded-md bg-secondary px-4 py-2 text-sm font-semibold text-secondary-content shadow-xs" },
+              { "label": "Preview", "class": "rounded-md border border-base-300 bg-base-100 px-4 py-2 text-sm font-semibold text-base-content" },
+              { "label": "Delete", "class": "rounded-md bg-error px-4 py-2 text-sm font-semibold text-error-content" }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "navigation",
+      "title": "Navigation",
+      "sourceChapter": "10-navigation.md",
+      "description": "Navigation preserves queue orientation without competing with message content.",
+      "examples": [
+        {
+          "id": "sidebar-navigation",
+          "title": "Sidebar items",
+          "description": "Counts stay trailing and current state uses a primary tint.",
+          "type": "navigation",
+          "tokens": ["--mp-color-primary", "--mp-color-base-200"],
+          "props": {
+            "items": [
+              { "label": "Inbox", "count": "42", "href": "navigation", "class": "flex h-10 items-center rounded-lg bg-primary/10 px-3 text-sm font-medium text-primary" },
+              { "label": "Review", "count": "8", "href": "navigation", "class": "flex h-10 items-center rounded-lg px-3 text-sm font-medium text-base-content/75 hover:bg-base-200" },
+              { "label": "Automations", "count": "12", "href": "navigation", "class": "flex h-10 items-center rounded-lg px-3 text-sm font-medium text-base-content/75 hover:bg-base-200" }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "tables",
+      "title": "Tables and Data Display",
+      "sourceChapter": "11-tables-data-display.md",
+      "description": "Tables keep sender, status, owner, and SLA visible for fast queue scanning.",
+      "examples": [
+        {
+          "id": "mailbox-table",
+          "title": "Mailbox queue table",
+          "description": "Status badges and SLA values remain visible at default density.",
+          "type": "table",
+          "tokens": ["--mp-color-base-300", "--mp-color-warning", "--mp-color-success"],
+          "props": {
+            "rows": [
+              { "sender": "Nora Lee", "status": "Needs review", "sla": "38m", "badgeClass": "bg-warning/20 text-warning-content" },
+              { "sender": "Acme Ops", "status": "Automated", "sla": "Done", "badgeClass": "bg-success/20 text-success-content" },
+              { "sender": "Billing Team", "status": "Failed", "sla": "Retry", "badgeClass": "bg-error/15 text-error" }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "feedback",
+      "title": "Feedback and Alerts",
+      "sourceChapter": "12-feedback-alerts.md",
+      "description": "Feedback appears at the scope of the event and stays actionable.",
+      "examples": [
+        {
+          "id": "alert-stack",
+          "title": "Scoped alerts",
+          "description": "Errors stay until resolved; success can confirm and disappear.",
+          "type": "feedback",
+          "tokens": ["--mp-color-info", "--mp-color-warning", "--mp-color-error"],
+          "props": {
+            "alerts": [
+              { "title": "Rule ready to publish", "text": "Review routing conditions before enabling automation.", "class": "rounded-lg border border-info bg-info/10 p-4 text-info-content" },
+              { "title": "SLA risk detected", "text": "Eight messages need owner review within one hour.", "class": "rounded-lg border border-warning bg-warning/15 p-4 text-warning-content" },
+              { "title": "Sync failed", "text": "Reconnect the mailbox before running this workflow again.", "class": "rounded-lg border border-error bg-error/10 p-4 text-error" }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

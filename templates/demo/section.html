@@ -1,0 +1,12 @@
+<section id="{{sectionId}}" class="scroll-mt-8 rounded-2xl border border-base-300 bg-base-100 p-6 shadow-xs" data-source-chapter="{{sourceChapter}}">
+  <div class="mb-6 flex flex-col gap-2 border-b border-base-300 pb-4 md:flex-row md:items-end md:justify-between">
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-wider text-base-content/55">{{sourceChapter}}</p>
+      <h2 class="text-2xl font-semibold tracking-tight">{{sectionTitle}}</h2>
+    </div>
+    <p class="max-w-2xl text-sm leading-6 text-base-content/65">{{sectionDescription}}</p>
+  </div>
+  <div class="grid gap-4 lg:grid-cols-2">
+    {{examples}}
+  </div>
+</section>

@@ -1,0 +1,64 @@
+{
+  "guideName": "MailPilot Design System Guidelines",
+  "slug": "mailpilot-design-guide",
+  "version": "0.1",
+  "status": "validated-work-surface",
+  "productContext": "SaaS product that automates shared mailbox triage, routing, follow-up, and customer operations for SMB teams.",
+  "direction": "Notion and Stripe inspired, but more colorful and workflow-state driven.",
+  "sourceMode": "Opinionated example created from user permission to invent missing decisions.",
+  "frameworkPolicy": "Tailwind CSS utility conventions only; component-framework agnostic.",
+  "tailwindSupport": "Latest stable Tailwind only.",
+  "tokenSources": {
+    "colors": "02-color-system.md",
+    "typography": "03-typography.md",
+    "spacing": "04-spacing-system.md",
+    "radius": "05-border-radius.md",
+    "elevation": "06-shadows-elevation.md",
+    "buttonIconSizes": "09-buttons.md"
+  },
+  "appendicesMerged": true,
+  "localDecisionsResolved": true,
+  "tailwindExport": {
+    "package": "tailwind/package.json",
+    "theme": "tailwind/src/theme.css",
+    "tokens": "tailwind/src/tokens.json",
+    "css": "tailwind/dist/design-guide.css"
+  },
+  "demo": {
+    "schema": "demo/demo.schema.json",
+    "data": "demo/demo-data.json",
+    "html": "demo/index.html",
+    "sourceTemplate": "templates/demo/index.html"
+  },
+  "validation": {
+    "status": "passed",
+    "commands": {
+      "guide": "node templates/validators/validate-guide.mjs examples/mailpilot-design-guide",
+      "tailwind": "node templates/validators/validate-tailwind-export.mjs examples/mailpilot-design-guide",
+      "demo": "node templates/validators/validate-demo.mjs examples/mailpilot-design-guide",
+      "all": "node templates/validators/validate-all.mjs examples/mailpilot-design-guide"
+    },
+    "checks": [
+      "No square-bracket placeholders in generated markdown.",
+      "No unresolved Local Decisions Required sections.",
+      "No stale removed-chapter references.",
+      "No non-Tailwind framework references.",
+      "Tailwind export builds with latest stable Tailwind.",
+      "Demo contains sidebar navigation and section examples generated from structured data."
+    ],
+    "results": [
+      {
+        "validator": "validate-guide.mjs",
+        "status": "passed"
+      },
+      {
+        "validator": "validate-tailwind-export.mjs",
+        "status": "passed"
+      },
+      {
+        "validator": "validate-demo.mjs",
+        "status": "passed"
+      }
+    ]
+  }
+}

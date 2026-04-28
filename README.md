@@ -75,6 +75,21 @@ Confirm the conversion first. If approved, rename the `Tailwind` column to match
 
 ---
 
+## AI generation workflow
+
+The intended agent workflow is:
+
+1. Create a guide workspace with `node scripts/create-guide.mjs "Product Name" --examples` or a custom output directory.
+2. Fill the generated markdown from user direction and supplied source material.
+3. Merge appendix guidance with `node scripts/merge-appendices.mjs <guide-dir>` after local decisions are resolved.
+4. Build the Tailwind export with `node scripts/build-tailwind-export.mjs <guide-dir> --build`.
+5. Build the deterministic demo with `node scripts/build-demo.mjs <guide-dir>`.
+6. Run the quality gate with `node templates/validators/validate-all.mjs <guide-dir>`.
+
+Reusable intake templates live in `templates/intake/`, reusable review prompts live in `templates/review/`, reusable validators live in `templates/validators/`, reusable demo templates live in `templates/demo/`, and committed generated examples live in `examples/`.
+
+---
+
 ## Conventions
 
 ### Placeholders
