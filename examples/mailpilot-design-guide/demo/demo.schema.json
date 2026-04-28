@@ -31,7 +31,7 @@
                 "description": { "type": "string", "minLength": 1 },
                 "type": {
                   "type": "string",
-                  "enum": ["color", "typography", "spacing", "surface", "state", "form", "button", "navigation", "table", "feedback"]
+                  "enum": ["color", "typography", "spacing", "surface", "state", "form", "button", "navigation", "table", "feedback", "screen"]
                 },
                 "tokens": {
                   "type": "array",

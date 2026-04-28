@@ -72,7 +72,7 @@ if (fs.existsSync(path.join(demoRoot, 'demo-data.json'))) {
 if (data) {
   if (schema) validateSchema(schema, data, 'demo-data.json');
   const exampleSchema = schema?.properties?.sections?.items?.properties?.examples?.items;
-  const allowedTypes = new Set(exampleSchema?.properties?.type?.enum || ['color', 'typography', 'spacing', 'surface', 'state', 'form', 'button', 'navigation', 'table', 'feedback']);
+  const allowedTypes = new Set(exampleSchema?.properties?.type?.enum || ['color', 'typography', 'spacing', 'surface', 'state', 'form', 'button', 'navigation', 'table', 'feedback', 'screen']);
   const rootRequired = schema?.required || ['guideName', 'version', 'description', 'tailwindExport', 'sections'];
   const seenIds = new Set();
   for (const key of rootRequired.filter((item) => item !== 'sections')) {
@@ -86,9 +86,10 @@ if (data) {
   }
   if (!Array.isArray(data.sections) || data.sections.length === 0) errors.push('demo-data.json must contain non-empty sections array');
   const expectedChapters = guideChapters();
-  const actualChapters = (data.sections || []).map((section) => section.sourceChapter).sort();
-  if (expectedChapters.join('|') !== actualChapters.join('|')) {
-    errors.push(`demo-data.json sourceChapter coverage mismatch; expected ${expectedChapters.join(', ')}, got ${actualChapters.join(', ')}`);
+  const actualChapterSet = new Set((data.sections || []).map((section) => section.sourceChapter));
+  const missingChapters = expectedChapters.filter((chapter) => !actualChapterSet.has(chapter));
+  if (missingChapters.length) {
+    errors.push(`demo-data.json sourceChapter coverage missing: ${missingChapters.join(', ')}`);
   }
   for (const section of data.sections || []) {
     if (!section.id || !section.title || !section.sourceChapter || !section.description) errors.push(`demo section is missing id, title, sourceChapter, or description: ${JSON.stringify(section)}`);

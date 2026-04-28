@@ -729,6 +729,133 @@
           }
         }
       ]
+    },
+    {
+      "id": "product-screens",
+      "title": "Product Screens",
+      "sourceChapter": "12-feedback-alerts.md",
+      "description": "Full-page examples combine tokens into realistic MailPilot product surfaces.",
+      "examples": [
+        {
+          "id": "dashboard-screen",
+          "title": "Dashboard overview",
+          "description": "A mailbox command center showing metrics, queue health, and automation activity.",
+          "type": "screen",
+          "tokens": [
+            "--mp-color-primary",
+            "--mp-color-warning",
+            "--mp-color-success",
+            "shadow-sm"
+          ],
+          "props": {
+            "screens": [
+              {
+                "kind": "dashboard",
+                "title": "Mailbox command center",
+                "metrics": [
+                  {
+                    "label": "Open conversations",
+                    "value": "428",
+                    "hint": "Across 4 shared inboxes",
+                    "class": "text-base-content"
+                  },
+                  {
+                    "label": "At SLA risk",
+                    "value": "18",
+                    "hint": "Needs owner review",
+                    "class": "text-warning-content"
+                  },
+                  {
+                    "label": "Automated today",
+                    "value": "1,204",
+                    "hint": "82% handled by rules",
+                    "class": "text-success-content"
+                  },
+                  {
+                    "label": "Failed syncs",
+                    "value": "3",
+                    "hint": "Reconnect required",
+                    "class": "text-error"
+                  }
+                ],
+                "queues": [
+                  {
+                    "name": "Support inbox",
+                    "value": "42 open",
+                    "class": "bg-primary/10 text-primary"
+                  },
+                  {
+                    "name": "Billing review",
+                    "value": "8 at risk",
+                    "class": "bg-warning/20 text-warning-content"
+                  },
+                  {
+                    "name": "Automation failed",
+                    "value": "3 failed",
+                    "class": "bg-error/15 text-error"
+                  }
+                ],
+                "activity": [
+                  {
+                    "title": "Rule published",
+                    "text": "VIP billing mail now routes to the Billing Lead.",
+                    "dot": "bg-success"
+                  },
+                  {
+                    "title": "Draft suggested",
+                    "text": "AI prepared 16 replies for human review.",
+                    "dot": "bg-accent"
+                  },
+                  {
+                    "title": "SLA warning",
+                    "text": "Eight messages require action within one hour.",
+                    "dot": "bg-warning"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "rule-builder-screen",
+          "title": "Automation rule builder",
+          "description": "Rule-building combines form controls, preview feedback, code-like mono text, and primary actions.",
+          "type": "screen",
+          "tokens": [
+            "font-mono",
+            "--mp-color-warning",
+            "--mp-color-primary"
+          ],
+          "props": {
+            "screens": [
+              {
+                "kind": "rule-builder",
+                "title": "Route VIP billing mail",
+                "description": "Build a rule that catches high-value customers before SLA risk escalates."
+              }
+            ]
+          }
+        },
+        {
+          "id": "settings-screen",
+          "title": "Mailbox settings form",
+          "description": "Settings use labelled fields, toggles, and a single primary save action.",
+          "type": "screen",
+          "tokens": [
+            "focus:ring-2",
+            "--mp-color-primary",
+            "rounded-md"
+          ],
+          "props": {
+            "screens": [
+              {
+                "kind": "settings",
+                "title": "Mailbox settings"
+              }
+            ]
+          }
+        }
+      ]
     }
   ]
 }
