@@ -11,7 +11,7 @@ This directory contains deterministic HTML demo templates for generated design g
 
 ## Rules
 
-- Use the validated Tailwind export from the generated guide.
+- Use the demo workspace's generated CSS (`tmp/pif/demo/dist/demo.css`), not the standalone export CSS.
 - Generate examples from structured data and typed props, not ad hoc prose.
 - Keep the demo static and component-framework-agnostic.
 - Target the latest stable Tailwind release only.

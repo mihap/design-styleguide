@@ -4,9 +4,24 @@ import os from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 
-const guideRoot = path.resolve(process.argv[2] || process.cwd());
+const args = process.argv.slice(2);
+function positionalArg(valueFlags = ['--export-dir']) {
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index];
+    if (valueFlags.includes(arg)) {
+      index += 1;
+      continue;
+    }
+    if (!arg.startsWith('-')) return arg;
+  }
+  return null;
+}
+const guideArg = positionalArg();
+const outIndex = args.indexOf('--export-dir');
+const guideRoot = path.resolve(guideArg || process.cwd());
 const noWrite = process.argv.includes('--no-write') || process.argv.includes('--read-only');
-const tailwindRoot = path.join(guideRoot, 'tailwind');
+const tailwindRoot = path.resolve(outIndex === -1 ? path.join(process.cwd(), 'tmp', 'pif', 'export') : args[outIndex + 1]);
+const tailwindDisplay = path.relative(process.cwd(), tailwindRoot) || '.';
 const errors = [];
 const frameworkPattern = new RegExp(['Daisy' + 'UI', 'Material ' + 'UI', 'Bootstrap', 'Radix', 'Chakra', 'Mantine'].join('|'), 'i');
 const removedChapterPattern = new RegExp(['Quick ' + 'Reference', 'quick' + '-' + 'reference', '§' + '13', '13' + '-' + 'quick' + '-' + 'reference'].join('|'), 'i');
@@ -16,7 +31,8 @@ const required = [
   'src/theme.css',
   'src/tokens.json',
   'src/input.css',
-  'src/fixture.html'
+  'src/fixture.html',
+  'dist/design-guide.css'
 ];
 
 function parseColor(value) {
@@ -117,14 +133,14 @@ function extractClasses(html) {
 }
 
 for (const file of required) {
-  if (!fs.existsSync(path.join(tailwindRoot, file))) errors.push(`Missing Tailwind export file: tailwind/${file}`);
+  if (!fs.existsSync(path.join(tailwindRoot, file))) errors.push(`Missing Tailwind export file: ${tailwindDisplay}/${file}`);
 }
 
 let tokens = null;
 if (fs.existsSync(path.join(tailwindRoot, 'package.json'))) {
   const pkg = JSON.parse(fs.readFileSync(path.join(tailwindRoot, 'package.json'), 'utf8'));
   const deps = { ...(pkg.dependencies || {}), ...(pkg.devDependencies || {}) };
-  if (!deps.tailwindcss) errors.push('tailwind/package.json must depend on tailwindcss latest stable');
+  if (!deps.tailwindcss) errors.push('export package.json must depend on tailwindcss latest stable');
   if (deps.tailwindcss && deps.tailwindcss !== 'latest' && !String(deps.tailwindcss).startsWith('^4')) {
     errors.push(`tailwindcss dependency should target latest stable only, got ${deps.tailwindcss}`);
   }
@@ -216,12 +232,15 @@ if (fs.existsSync(path.join(tailwindRoot, 'src/tokens.json'))) {
 
 for (const file of required.filter((file) => fs.existsSync(path.join(tailwindRoot, file)))) {
   const text = fs.readFileSync(path.join(tailwindRoot, file), 'utf8');
-  if (text.includes('[') || text.includes(']')) errors.push(`tailwind/${file}: contains square-bracket placeholder characters`);
-  if (frameworkPattern.test(text)) errors.push(`tailwind/${file}: contains non-Tailwind framework contamination`);
-  if (removedChapterPattern.test(text)) errors.push(`tailwind/${file}: contains stale removed-chapter reference`);
+  if (file !== 'dist/design-guide.css' && (text.includes('[') || text.includes(']'))) errors.push(`${tailwindDisplay}/${file}: contains square-bracket placeholder characters`);
+  if (frameworkPattern.test(text)) errors.push(`${tailwindDisplay}/${file}: contains non-Tailwind framework contamination`);
+  if (removedChapterPattern.test(text)) errors.push(`${tailwindDisplay}/${file}: contains stale removed-chapter reference`);
 }
 
 const inputCss = path.join(tailwindRoot, 'src/input.css');
+if (fs.existsSync(inputCss) && /demo\/index\.html|\.\.\/index\.html/.test(fs.readFileSync(inputCss, 'utf8'))) {
+  errors.push('Tailwind export input.css must not source demo HTML; demo CSS is generated separately under tmp/pif/demo');
+}
 const tempOutputDir = noWrite ? fs.mkdtempSync(path.join(os.tmpdir(), 'pif-validator-')) : null;
 const outputCss = tempOutputDir ? path.join(tempOutputDir, 'validator.css') : path.join(tailwindRoot, 'dist/validator.css');
 try {
@@ -238,7 +257,7 @@ try {
       errors.push('Tailwind build produced empty CSS output');
     } else {
       const css = fs.readFileSync(outputCss, 'utf8');
-      const sourceFiles = [path.join(tailwindRoot, 'src/fixture.html'), path.join(guideRoot, 'demo/index.html')].filter((file) => fs.existsSync(file));
+      const sourceFiles = [path.join(tailwindRoot, 'src/fixture.html')].filter((file) => fs.existsSync(file));
       const classes = new Set();
       for (const file of sourceFiles) {
         for (const className of extractClasses(fs.readFileSync(file, 'utf8'))) classes.add(className);
@@ -255,9 +274,9 @@ try {
 }
 
 if (errors.length) {
-  console.error(`Tailwind export validation failed for ${guideRoot}`);
+  console.error(`Tailwind export validation failed for ${tailwindRoot}`);
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
 
-console.log(`Tailwind export validation passed for ${guideRoot}`);
+console.log(`Tailwind export validation passed for ${tailwindRoot}`);

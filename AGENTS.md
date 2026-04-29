@@ -18,7 +18,7 @@ PI package.
 - **Scripts and validators stay dependency-free** (Node ≥ 18, `node:` builtins only).
 - **Don't fill `[placeholder]` slots in `design-system-blueprint/`.** Templates ship unfilled; users fill them in their own projects. Editing the templates means changing the structure, wording, or placeholder shape — not replacing slots with concrete values.
 - **Don't add or remove files in `design-system-blueprint/`** without explicit instruction. Don't change column counts, column order, row order, file numbering, or heading levels.
-- **Don't edit generated artifacts in the example by hand** (`tailwind/src/theme.css`, `tailwind/src/tokens.json`, `demo/index.html`). Re-run the pipeline.
+- **Don't commit generated demo/export artifacts.** They are regenerated under `tmp/pif/demo` and `tmp/pif/export`; re-run the pipeline instead of hand-editing artifact output.
 
 ## Appendix sidecars
 
@@ -29,6 +29,8 @@ Each file in `design-system-blueprint-appendices/` must include `Scope`, `Best P
 ```bash
 node scripts/smoke-test.mjs                                              # fast, no install
 node scripts/smoke-test.mjs --full                                       # installs example Tailwind
+node scripts/build-tailwind-export.mjs examples/mailpilot-design-guide --build
+node scripts/build-demo.mjs examples/mailpilot-design-guide --build
 node templates/validators/validate-all.mjs examples/mailpilot-design-guide
 npm pack --dry-run                                                       # check package files
 ```
@@ -43,4 +45,4 @@ The MailPilot example must keep passing — regressions there are a blocker.
 
 ## Commits
 
-Short imperative subject, no scope prefix, no trailing period (`Add demo visual review checklist`, `Update workflow implementation status`). `tmp/`, `**/node_modules/`, and `**/dist/validator.css` are gitignored — keep them that way.
+Short imperative subject, no scope prefix, no trailing period (`Add demo visual review checklist`, `Update workflow implementation status`). `tmp/`, `**/node_modules/`, and generated CSS artifacts are gitignored — keep them that way.

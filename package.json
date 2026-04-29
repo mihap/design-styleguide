@@ -14,6 +14,7 @@
   "files": [
     "design-system-blueprint/",
     "design-system-blueprint-appendices/",
+    "examples/",
     "extensions/",
     "prompts/",
     "scripts/",
@@ -33,7 +34,7 @@
   "scripts": {
     "smoke-test": "node scripts/smoke-test.mjs",
     "smoke-test:full": "node scripts/smoke-test.mjs --full",
-    "validate:example": "node templates/validators/validate-all.mjs examples/mailpilot-design-guide"
+    "validate:example": "node scripts/build-tailwind-export.mjs examples/mailpilot-design-guide --build && node scripts/build-demo.mjs examples/mailpilot-design-guide --build && node templates/validators/validate-all.mjs examples/mailpilot-design-guide"
   },
   "peerDependencies": {
     "@mariozechner/pi-coding-agent": "*"

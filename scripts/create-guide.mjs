@@ -122,9 +122,6 @@ const demoSchemaSource = path.join(repoRoot, 'templates', 'demo', 'demo.schema.j
 const demoSchemaTarget = path.join(target, 'demo', 'demo.schema.json');
 if (!fs.existsSync(demoSchemaTarget) || force) fs.copyFileSync(demoSchemaSource, demoSchemaTarget);
 
-fs.mkdirSync(path.join(target, 'tailwind', 'src'), { recursive: true });
-fs.mkdirSync(path.join(target, 'tailwind', 'dist'), { recursive: true });
-
 const manifestPath = path.join(target, 'manifest.json');
 if (!fs.existsSync(manifestPath) || overwriteManifest) {
   const manifest = {
@@ -135,6 +132,7 @@ if (!fs.existsSync(manifestPath) || overwriteManifest) {
     sourceMode: 'Generated from design-system-blueprint; values require user direction or source material.',
     frameworkPolicy: 'Tailwind CSS utility conventions only; component-framework agnostic.',
     tailwindSupport: 'Latest stable Tailwind only.',
+    artifactPolicy: 'Generated demo and Tailwind export workspaces are written to tmp/pif/demo and tmp/pif/export, not committed inside the guide directory.',
     tokenSources: {
       colors: '02-color-system.md',
       typography: '03-typography.md',
@@ -145,6 +143,10 @@ if (!fs.existsSync(manifestPath) || overwriteManifest) {
     },
     appendicesMerged: false,
     localDecisionsResolved: false,
+    artifacts: {
+      demo: 'tmp/pif/demo',
+      tailwindExport: 'tmp/pif/export'
+    },
     validation: { status: 'not-run', commands: {} }
   };
   fs.writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);

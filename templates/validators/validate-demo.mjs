@@ -2,8 +2,23 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const guideRoot = path.resolve(process.argv[2] || process.cwd());
-const demoRoot = path.join(guideRoot, 'demo');
+const args = process.argv.slice(2);
+function positionalArg(valueFlags = ['--demo-dir']) {
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index];
+    if (valueFlags.includes(arg)) {
+      index += 1;
+      continue;
+    }
+    if (!arg.startsWith('-')) return arg;
+  }
+  return null;
+}
+const guideArg = positionalArg();
+const outIndex = args.indexOf('--demo-dir');
+const guideRoot = path.resolve(guideArg || process.cwd());
+const demoRoot = path.resolve(outIndex === -1 ? path.join(process.cwd(), 'tmp', 'pif', 'demo') : args[outIndex + 1]);
+const requireCss = args.includes('--require-css');
 const errors = [];
 const frameworkPattern = new RegExp(['Daisy' + 'UI', 'Material ' + 'UI', 'Bootstrap', 'Radix', 'Chakra', 'Mantine'].join('|'), 'i');
 const removedChapterPattern = new RegExp(['Quick ' + 'Reference', 'quick' + '-' + 'reference', '§' + '13', '13' + '-' + 'quick' + '-' + 'reference'].join('|'), 'i');
@@ -48,6 +63,30 @@ function validateSchema(schema, value, location) {
   }
 }
 
+function isInsideDirectory(root, candidate) {
+  const relative = path.relative(root, candidate);
+  return relative === '' || (!relative.startsWith('..') && !path.isAbsolute(relative));
+}
+
+function isLocalStylesheetPath(value) {
+  const text = String(value || '').trim();
+  if (!text) return false;
+  if (path.isAbsolute(text) || path.win32.isAbsolute(text) || /^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(text)) return false;
+  const parts = text.replace(/\\/g, '/').split('/');
+  return !parts.includes('..');
+}
+
+function stylesheetHrefs(html) {
+  const hrefs = [];
+  for (const match of html.matchAll(/<link\b[^>]*>/gi)) {
+    const tag = match[0];
+    if (!/\brel=(['"])stylesheet\1/i.test(tag)) continue;
+    const href = tag.match(/\bhref=(['"])(.*?)\1/i)?.[2];
+    if (href) hrefs.push(href);
+  }
+  return hrefs;
+}
+
 for (const file of ['index.html', 'demo.schema.json', 'demo-data.json']) {
   if (!fs.existsSync(path.join(demoRoot, file))) errors.push(`Missing demo file: demo/${file}`);
 }
@@ -73,7 +112,7 @@ if (data) {
   if (schema) validateSchema(schema, data, 'demo-data.json');
   const exampleSchema = schema?.properties?.sections?.items?.properties?.examples?.items;
   const allowedTypes = new Set(exampleSchema?.properties?.type?.enum || ['color', 'typography', 'spacing', 'surface', 'state', 'form', 'button', 'navigation', 'table', 'feedback', 'screen']);
-  const rootRequired = schema?.required || ['guideName', 'version', 'description', 'tailwindExport', 'sections'];
+  const rootRequired = schema?.required || ['guideName', 'version', 'description', 'stylesheet', 'sections'];
   const seenIds = new Set();
   for (const key of rootRequired.filter((item) => item !== 'sections')) {
     if (typeof data[key] !== 'string' || data[key].length === 0) errors.push(`demo-data.json missing string field: ${key}`);
@@ -134,14 +173,24 @@ if (fs.existsSync(path.join(demoRoot, 'index.html'))) {
     for (const sectionId of sectionIds) {
       if (!sidebarTargets.includes(sectionId)) errors.push(`demo sidebar missing link for section id: ${sectionId}`);
     }
-    if (!html.includes(data.tailwindExport)) errors.push(`demo/index.html does not link configured Tailwind export ${data.tailwindExport}`);
+    const stylesheet = data.stylesheet || data.tailwindExport;
+    if (!stylesheet) errors.push('demo-data.json missing stylesheet field');
+    else {
+      if (!data.stylesheet) errors.push('demo-data.json must use canonical stylesheet field');
+      if (!isLocalStylesheetPath(stylesheet)) errors.push(`demo stylesheet must be a relative local path inside the demo workspace: ${stylesheet}`);
+      const hrefs = stylesheetHrefs(html);
+      if (!hrefs.includes(stylesheet)) errors.push(`demo/index.html does not link configured stylesheet ${stylesheet}`);
+      const stylesheetPath = path.resolve(demoRoot, stylesheet);
+      if (!isInsideDirectory(demoRoot, stylesheetPath)) errors.push(`demo stylesheet escapes the demo workspace: ${stylesheet}`);
+      if (requireCss && (!fs.existsSync(stylesheetPath) || fs.statSync(stylesheetPath).size === 0)) errors.push(`demo stylesheet is missing or empty: ${stylesheet}`);
+    }
   }
 }
 
 if (errors.length) {
-  console.error(`Demo validation failed for ${guideRoot}`);
+  console.error(`Demo validation failed for ${demoRoot}`);
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
 
-console.log(`Demo validation passed for ${guideRoot}`);
+console.log(`Demo validation passed for ${demoRoot}`);

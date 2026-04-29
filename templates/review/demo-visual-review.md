@@ -1,12 +1,12 @@
 # Demo Visual Review Checklist
 
-Use this checklist after `demo/index.html` is generated and validators pass. The goal is to catch visual, interaction, and product-realism issues that static validators cannot fully judge.
+Use this checklist after `tmp/pif/demo/index.html` is generated and validators pass. The goal is to catch visual, interaction, and product-realism issues that static validators cannot fully judge.
 
 ## Setup
 
-1. Build the Tailwind export.
-2. Build the demo.
-3. Open `demo/index.html` in a browser.
+1. Build the Tailwind export workspace.
+2. Build the demo workspace.
+3. Open `tmp/pif/demo/index.html` in a browser.
 4. Review desktop width first, then tablet/mobile widths.
 
 ## Required Checks
@@ -60,7 +60,7 @@ Use this checklist after `demo/index.html` is generated and validators pass. The
 
 ### Tailwind and Framework Policy
 
-- [ ] Demo uses generated Tailwind export classes and tokens.
+- [ ] Demo uses its generated demo CSS and declared guide tokens.
 - [ ] Demo does not rely on component-framework markup or scripts.
 - [ ] Demo does not use arbitrary bracket utilities for core deterministic examples.
 - [ ] Demo examples stay static and reproducible from `demo/demo-data.json`.

@@ -2,7 +2,7 @@
   "guideName": "MailPilot Design System Guidelines",
   "version": "Version 0.1",
   "description": "A colorful Tailwind-oriented design system for SMB shared-mailbox automation, inspired by Notion's clarity and Stripe's precision.",
-  "tailwindExport": "../tailwind/dist/design-guide.css",
+  "stylesheet": "./dist/demo.css",
   "sections": [
     {
       "id": "philosophy",
@@ -185,7 +185,8 @@
             "text-5xl",
             "text-4xl",
             "text-sm",
-            "text-xs"
+            "text-small",
+            "text-tiny"
           ],
           "props": {
             "scale": [
@@ -229,13 +230,13 @@
                 "name": "Small",
                 "size": "0.8125rem",
                 "text": "Owner, channel, and status metadata",
-                "class": "text-xs font-medium leading-5 text-base-content/70"
+                "class": "text-small font-medium text-base-content/70"
               },
               {
                 "name": "Tiny",
                 "size": "0.75rem",
                 "text": "SLA due in 38m",
-                "class": "text-xs font-medium tracking-wide text-warning-content"
+                "class": "text-tiny font-medium tracking-wide text-warning-content"
               }
             ]
           }

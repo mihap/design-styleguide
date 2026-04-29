@@ -44,8 +44,8 @@ Use a compact scale with generous body line height for split-pane scanning.
 | H5         | 1.125rem | 600    | 1.35        | text-lg leading-snug  | Use for compact group headings. |
 | Body Large | 1rem     | 400    | 1.6         | text-base leading-relaxed | Use for explanatory copy. |
 | Body       | 0.875rem | 400    | 1.5         | text-sm leading-6     | Use for app body, tables, and controls. |
-| Small      | 0.8125rem | 500   | 1.45        | text-xs leading-5     | Use for labels, badges, and metadata. |
-| Tiny       | 0.75rem  | 500    | 1.35        | text-xs leading-tight | Use for counters, timestamps, and compact hints. |
+| Small      | 0.8125rem | 500   | 1.45        | text-small            | Use for labels, badges, and metadata. |
+| Tiny       | 0.75rem  | 500    | 1.35        | text-tiny             | Use for counters, timestamps, and compact hints. |
 
 ---
 

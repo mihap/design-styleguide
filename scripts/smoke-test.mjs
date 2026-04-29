@@ -36,7 +36,12 @@ function assertExists(label, filePath) {
   if (!fs.existsSync(filePath)) errors.push(`${label} missing: ${path.relative(repoRoot, filePath)}`);
 }
 
+function assertMissing(label, filePath) {
+  if (fs.existsSync(filePath)) errors.push(`${label} should not exist: ${path.relative(repoRoot, filePath)}`);
+}
+
 fs.rmSync(smokeGuide, { recursive: true, force: true });
+fs.rmSync(path.join(tmpRoot, 'pif'), { recursive: true, force: true });
 fs.mkdirSync(tmpRoot, { recursive: true });
 
 expectPass('create-guide scaffold', process.execPath, ['scripts/create-guide.mjs', 'Smoke Product', '--out', 'tmp']);
@@ -47,19 +52,21 @@ for (const file of [
   'manifest.json',
   'demo/demo.schema.json',
   'scripts/blueprint-shape.json',
-  'scripts/validate-all.mjs',
-  'tailwind/src'
+  'scripts/validate-all.mjs'
 ]) {
   assertExists('scaffold file', path.join(smokeGuide, file));
 }
+assertMissing('scaffold Tailwind artifact directory', path.join(smokeGuide, 'tailwind'));
+assertMissing('scaffold demo HTML artifact', path.join(smokeGuide, 'demo/index.html'));
 
 expectFail('placeholder scaffold guide validation', process.execPath, ['templates/validators/validate-guide.mjs', smokeGuide]);
 expectPass('MailPilot guide validation', process.execPath, ['templates/validators/validate-guide.mjs', exampleGuide]);
+expectPass('MailPilot demo render', process.execPath, ['scripts/build-demo.mjs', exampleGuide]);
 expectPass('MailPilot demo validation', process.execPath, ['templates/validators/validate-demo.mjs', exampleGuide]);
 
 if (full) {
-  expectPass('MailPilot Tailwind npm install', 'npm', ['install'], { cwd: path.join(exampleGuide, 'tailwind') });
-  expectPass('MailPilot Tailwind build', 'npm', ['run', 'build'], { cwd: path.join(exampleGuide, 'tailwind') });
+  expectPass('MailPilot Tailwind export build', process.execPath, ['scripts/build-tailwind-export.mjs', exampleGuide, '--build']);
+  expectPass('MailPilot demo CSS build', process.execPath, ['scripts/build-demo.mjs', exampleGuide, '--build']);
   expectPass('MailPilot full validation', process.execPath, ['templates/validators/validate-all.mjs', exampleGuide]);
 } else {
   console.log('Skipping Tailwind build validation; run `node scripts/smoke-test.mjs --full` for the full smoke test.');

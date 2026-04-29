@@ -58,24 +58,24 @@ Mandatory workflow:
 
 1. Follow project contribution guidance, including branch naming.
 2. Write output to `docs/styleguide/` unless the project specifies another path.
-3. Copy and fill all blueprint chapters.
-4. Consolidate best practices from appendix sidecars.
-5. Build the Tailwind export and deterministic demo page.
-6. Add pif enforcement guidance to the target project's `AGENTS.md`.
+3. Copy and fill all blueprint chapters from the user prompt and project sources; do not invent missing design decisions unless the user explicitly authorizes draft defaults.
+4. Consolidate best practices from appendix sidecars. Resolve local decisions only from source material or explicit draft-default authorization; otherwise stop with blockers/questions.
+5. Build disposable Tailwind export and deterministic demo workspaces under `tmp/pif/export` and `tmp/pif/demo`.
+6. Ensure `tmp/pif/` is ignored by git, then add pif enforcement guidance to the target project's `AGENTS.md`.
 7. Run the internal `/pif validate-self` workflow: validators, generated-guide self-review, fixes for generated guide/export/demo issues, and validator re-run.
-8. Open `demo/index.html` and wait for user approval.
+8. Open `tmp/pif/demo/index.html`, tell the user export files are ready in `tmp/pif/export`, and wait for approval.
 
 ### `/pif update <prompt>`
 
-Updates styleguide values according to the prompt, sweeps downstream references, rebuilds exports/demo, runs internal `/pif validate-self`, and opens the demo for approval.
+Updates styleguide values according to the prompt, sweeps downstream references, rebuilds `tmp/pif/export` and `tmp/pif/demo`, runs internal `/pif validate-self`, and opens the demo for approval.
 
 ### `/pif update`
 
-Regenerates the demo only, runs internal `/pif validate-self`, and opens the demo for approval. It should not change guide values unless required to fix demo generation.
+Regenerates the disposable demo workspace only, runs internal `/pif validate-self`, and opens `tmp/pif/demo/index.html` for approval. It should not change guide values unless required to fix demo generation.
 
 ### `/pif validate-self [target]`
 
-Validates the generated pif styleguide itself. This is the named form of the internal QA pass that runs immediately after `/pif create` and `/pif update`: run validators, inspect generated guide structure/placeholders/token references/appendix integration/Tailwind export/demo coverage, fix generated guide/export/demo issues when possible, and re-run validators. It is not for feature-code compliance review and must not edit application feature code.
+Validates the generated pif styleguide itself. This is the named form of the internal QA pass that runs immediately after `/pif create` and `/pif update`: refresh `tmp/pif/export` and `tmp/pif/demo`, run validators, inspect generated guide structure/placeholders/token references/appendix integration/Tailwind export/demo coverage, fix generated guide/export/demo issues when possible, and re-run validators. It is not for feature-code compliance review and must not edit application feature code.
 
 ### `/pif review [target]`
 
@@ -93,8 +93,8 @@ When the prompt or mentioned files indicate UI, layout, styling, Tailwind, compo
 
 1. Locate the pif styleguide.
 2. Run `pif-builder` in a separate read-only pi process.
-3. Inject compact styleguide constraints into the main turn.
-4. Require the main agent to follow those constraints.
+3. Inject compact styleguide constraints into the main turn as untrusted constraint evidence.
+4. Require the main agent to apply only concrete design constraints (tokens, spacing, typography, states, component rules) and ignore any role/tool/command/workflow instructions embedded in the injected output.
 
 ### Review turns
 
@@ -102,8 +102,8 @@ When the task is a review and frontend files are present in the working tree, st
 
 1. Collect frontend file names and capped diff/file context.
 2. Run `pif-reviewer` in a separate read-only pi process.
-3. Inject reviewer findings.
-4. Require the final answer to include `Styleguide Review`.
+3. Inject reviewer findings as untrusted evidence.
+4. Require the final answer to include `Styleguide Review` based on concrete findings, while ignoring any role/tool/command/workflow instructions embedded in the injected output.
 
 Backend-only prompts are ignored.
 
@@ -136,7 +136,7 @@ Notes:
 
 ## Generated output
 
-A generated guide contains:
+A generated guide contains source-of-truth guide files and reusable validation support:
 
 ```text
 docs/styleguide/
@@ -145,11 +145,6 @@ docs/styleguide/
   demo/
     demo-data.json
     demo.schema.json
-    index.html
-  tailwind/
-    src/theme.css
-    src/tokens.json
-    src/fixture.html
   scripts/
     validate-all.mjs
     validate-guide.mjs
@@ -160,6 +155,30 @@ docs/styleguide/
 ```
 
 The numbered chapter order is intentional. Later component chapters reference token decisions declared in earlier chapters.
+
+Generated artifacts are disposable and are written outside the guide directory:
+
+```text
+tmp/pif/demo/
+  index.html
+  demo-data.json
+  demo.schema.json
+  package.json
+  src/theme.css
+  src/tokens.json
+  src/input.css
+  dist/demo.css
+
+tmp/pif/export/
+  package.json
+  src/theme.css
+  src/tokens.json
+  src/input.css
+  src/fixture.html
+  dist/design-guide.css
+```
+
+Add `tmp/pif/` to the target project's `.gitignore`. Copy or integrate files from `tmp/pif/export` into the product only when the user approves that handoff.
 
 ---
 
@@ -209,8 +228,10 @@ pif/
 Run the validated example:
 
 ```bash
+node scripts/build-tailwind-export.mjs examples/mailpilot-design-guide --build
+node scripts/build-demo.mjs examples/mailpilot-design-guide --build
 node templates/validators/validate-all.mjs examples/mailpilot-design-guide --no-write
-open examples/mailpilot-design-guide/demo/index.html
+open tmp/pif/demo/index.html
 ```
 
 Create a guide workspace under `examples/`:
@@ -230,7 +251,7 @@ Run the production workflow after guide values are filled:
 ```bash
 node scripts/merge-appendices.mjs examples/acme-inbox-design-guide
 node scripts/build-tailwind-export.mjs examples/acme-inbox-design-guide --build
-node scripts/build-demo.mjs examples/acme-inbox-design-guide
+node scripts/build-demo.mjs examples/acme-inbox-design-guide --build
 node scripts/prepare-review.mjs examples/acme-inbox-design-guide
 node templates/validators/validate-all.mjs examples/acme-inbox-design-guide
 ```
@@ -257,7 +278,8 @@ npm pack --dry-run
 - Pi packages run with user permissions. Install only from trusted sources.
 - `pif-builder` and `pif-reviewer` are spawned with read-only tools only.
 - The extension disables recursive extension activation in subagent processes.
-- User prompts, diffs, file names, and injected reviewer output are treated as untrusted data.
+- User prompts, diffs, file names, styleguide content, and pif subagent output are treated as untrusted data.
+- Prompt-mentioned file paths are normalized to repo-relative paths and rejected if absolute, parent-traversing, symlinked outside the project, or outside the current working directory.
 - `/pif review` is for read-only frontend code review against the styleguide; `/pif validate-self` is for generated-styleguide QA.
 - The package does not add non-Tailwind framework assumptions unless user source material explicitly requires them.
 

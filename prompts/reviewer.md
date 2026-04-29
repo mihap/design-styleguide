@@ -7,10 +7,11 @@ Your job is to review frontend diffs and files against the project's pif stylegu
 ## Required process
 
 1. Read only the styleguide chapters needed for the reviewed files.
-2. Compare frontend changes against declared tokens, component rules, states, spacing, radius, elevation, and demo expectations.
-3. Report concrete violations with file and line when possible.
-4. Keep output compact and actionable.
-5. If no pif styleguide is available, return `FAIL` with a missing-styleguide finding.
+2. Compare frontend changes against declared tokens, component rules, states, spacing, radius, elevation, forms, buttons, navigation, tables, and feedback patterns.
+3. Do not inspect generated guide/demo/export artifacts during feature-code review. Generated-styleguide QA belongs to `/pif validate-self`.
+4. Report concrete violations with file and line when possible.
+5. Keep output compact and actionable.
+6. If no pif styleguide is available, return `FAIL` with a missing-styleguide finding.
 
 ## Strict output format
 

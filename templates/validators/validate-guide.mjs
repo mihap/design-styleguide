@@ -119,9 +119,13 @@ function shapeFromDir(blueprintDir) {
 
 function compareBlueprintShape(blueprintDir) {
   const shapePath = path.join(root, 'scripts', 'blueprint-shape.json');
+  const envBlueprintDir = process.env.DESIGN_GUIDE_BLUEPRINT_DIR && fs.existsSync(process.env.DESIGN_GUIDE_BLUEPRINT_DIR)
+    ? path.resolve(process.env.DESIGN_GUIDE_BLUEPRINT_DIR)
+    : null;
   let shape = null;
-  if (blueprintDir) shape = shapeFromDir(blueprintDir);
+  if (envBlueprintDir) shape = shapeFromDir(envBlueprintDir);
   else if (fs.existsSync(shapePath)) shape = JSON.parse(fs.readFileSync(shapePath, 'utf8'));
+  else if (blueprintDir) shape = shapeFromDir(blueprintDir);
   else {
     errors.push('Could not locate design-system-blueprint or scripts/blueprint-shape.json for table-shape validation; set DESIGN_GUIDE_BLUEPRINT_DIR');
     return;

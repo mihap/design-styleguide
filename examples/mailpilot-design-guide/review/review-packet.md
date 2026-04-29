@@ -4,14 +4,17 @@ Use this prompt for an independent review pass after a guide has been generated.
 
 ## Role
 
-You are an independent reviewer. You did not author the guide. Review the generated design guide, Tailwind export, demo, and manifest for production readiness.
+You are an independent reviewer. You did not author the guide. Review the generated design guide, disposable Tailwind export workspace, disposable demo workspace, and manifest for production readiness.
 
 ## Inputs
 
+- pif package root: `.`
 - Generated guide directory: `examples/mailpilot-design-guide`
-- Source blueprint: `design-system-blueprint/`
-- Appendices: `design-system-blueprint-appendices/`
-- Validators: `templates/validators/`
+- Generated demo workspace: `tmp/pif/demo`
+- Generated Tailwind export workspace: `tmp/pif/export`
+- Source blueprint: `./design-system-blueprint/`
+- Appendices: `./design-system-blueprint-appendices/`
+- Validators: `./templates/validators/`
 
 ## Review Tasks
 
@@ -27,10 +30,10 @@ You are an independent reviewer. You did not author the guide. Review the genera
    - elevation/shadow in `06-shadows-elevation.md`
    - button icon sizes in `09-buttons.md`
 6. Confirm value-bearing component specs reference declared tokens or scales where applicable.
-7. Confirm Tailwind export targets latest stable Tailwind only and uses no component-framework assumptions.
-8. Confirm demo is deterministic, schema-driven, sidebar-navigable, and backed by the validated Tailwind export.
+7. Confirm Tailwind export targets latest stable Tailwind only, uses no component-framework assumptions, and is generated under the export workspace rather than committed into the guide.
+8. Confirm demo is deterministic, schema-driven, sidebar-navigable, backed by its own generated demo CSS, and generated under the demo workspace rather than committed into the guide.
 9. Confirm color pairs used for content on fills meet at least 3:1 contrast, and body-like text pairs meet WCAG AA where applicable.
-10. Run the demo visual review checklist from `templates/review/demo-visual-review.md` when browser access is available.
+10. Run the demo visual review checklist from `./templates/review/demo-visual-review.md` when browser access is available.
 11. Run the validators in no-write mode and report exact commands and results.
 
 ## Output Format
@@ -68,22 +71,33 @@ Do not invent missing design decisions. If a production decision is missing, fla
 
 ## Recommended Commands
 
+These commands reset to the directory where this packet was generated before running. Override `EXPORT_DIR` or `DEMO_DIR` if you want artifacts somewhere else.
+
 ```bash
-node 'templates/validators/validate-all.mjs' 'examples/mailpilot-design-guide' --no-write
-node 'examples/mailpilot-design-guide/scripts/validate-all.mjs' 'examples/mailpilot-design-guide' --no-write
+REVIEW_CWD='.'
+PIF_ROOT='.'
+GUIDE_DIR='examples/mailpilot-design-guide'
+EXPORT_DIR='tmp/pif/export'
+DEMO_DIR='tmp/pif/demo'
+
+cd "$REVIEW_CWD"
+node "$PIF_ROOT/scripts/build-tailwind-export.mjs" "$GUIDE_DIR" --out "$EXPORT_DIR" --build
+node "$PIF_ROOT/scripts/build-demo.mjs" "$GUIDE_DIR" --out "$DEMO_DIR" --build
+node "$PIF_ROOT/templates/validators/validate-all.mjs" "$GUIDE_DIR" --export-dir "$EXPORT_DIR" --demo-dir "$DEMO_DIR" --no-write
+node "$GUIDE_DIR/scripts/validate-all.mjs" "$GUIDE_DIR" --export-dir "$EXPORT_DIR" --demo-dir "$DEMO_DIR" --no-write
 ```
 
 ---
 
 # Demo Visual Review Checklist
 
-Use this checklist after `demo/index.html` is generated and validators pass. The goal is to catch visual, interaction, and product-realism issues that static validators cannot fully judge.
+Use this checklist after `tmp/pif/demo/index.html` is generated and validators pass. The goal is to catch visual, interaction, and product-realism issues that static validators cannot fully judge.
 
 ## Setup
 
-1. Build the Tailwind export.
-2. Build the demo.
-3. Open `demo/index.html` in a browser.
+1. Build the Tailwind export workspace.
+2. Build the demo workspace.
+3. Open `tmp/pif/demo/index.html` in a browser.
 4. Review desktop width first, then tablet/mobile widths.
 
 ## Required Checks
@@ -137,7 +151,7 @@ Use this checklist after `demo/index.html` is generated and validators pass. The
 
 ### Tailwind and Framework Policy
 
-- [ ] Demo uses generated Tailwind export classes and tokens.
+- [ ] Demo uses its generated demo CSS and declared guide tokens.
 - [ ] Demo does not rely on component-framework markup or scripts.
 - [ ] Demo does not use arbitrary bracket utilities for core deterministic examples.
 - [ ] Demo examples stay static and reproducible from `demo/demo-data.json`.

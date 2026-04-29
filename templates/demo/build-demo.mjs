@@ -3,9 +3,23 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const guideRoot = path.resolve(process.argv[2] || process.cwd());
+const args = process.argv.slice(2);
+function positionalArg(valueFlags = ['--out']) {
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index];
+    if (valueFlags.includes(arg)) {
+      index += 1;
+      continue;
+    }
+    if (!arg.startsWith('-')) return arg;
+  }
+  return null;
+}
+const guideArg = positionalArg();
+const outIndex = args.indexOf('--out');
+const guideRoot = path.resolve(guideArg || process.cwd());
 const here = path.dirname(fileURLToPath(import.meta.url));
-const demoRoot = path.join(guideRoot, 'demo');
+const demoRoot = path.resolve(outIndex === -1 ? path.join(guideRoot, 'demo') : args[outIndex + 1]);
 const data = JSON.parse(fs.readFileSync(path.join(demoRoot, 'demo-data.json'), 'utf8'));
 
 function esc(value = '') {
@@ -92,6 +106,7 @@ const shell = fs.readFileSync(path.join(here, 'index.html'), 'utf8')
   .replaceAll('{{guideName}}', esc(data.guideName))
   .replaceAll('{{version}}', esc(data.version))
   .replaceAll('{{description}}', esc(data.description))
+  .replaceAll('{{stylesheet}}', esc(data.stylesheet || data.tailwindExport || './dist/demo.css'))
   .replaceAll('{{sidebarItems}}', sidebarItems)
   .replaceAll('{{sections}}', sections);
 
