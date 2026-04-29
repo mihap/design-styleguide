@@ -2,8 +2,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 
-const repoRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const full = process.argv.includes('--full') || process.env.SMOKE_FULL === '1';
 const tmpRoot = path.join(repoRoot, 'tmp');
 const smokeGuide = path.join(tmpRoot, 'smoke-product-design-guide');

@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const repoRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
 const guideRoot = path.resolve(args.find((arg) => !arg.startsWith('-')) || '');
 
@@ -26,7 +27,12 @@ const files = fs.readdirSync(guideRoot)
   .filter((file) => /^\d{2}-.*\.md$/.test(file) || file === 'manifest.json')
   .sort();
 const visualChecklistPath = path.join(repoRoot, 'templates', 'review', 'demo-visual-review.md');
-const visualChecklist = fs.existsSync(visualChecklistPath) ? fs.readFileSync(visualChecklistPath, 'utf8') : '';
-const packet = `${prompt}\n\n---\n\n## Files to Review\n\n${files.map((file) => `- ${path.join(path.relative(repoRoot, guideRoot), file)}`).join('\n')}\n\n## Recommended Commands\n\n\`\`\`bash\nnode templates/validators/validate-all.mjs ${path.relative(repoRoot, guideRoot)}\nnode ${path.join(path.relative(repoRoot, guideRoot), 'scripts/validate-all.mjs')} ${path.relative(repoRoot, guideRoot)}\n\`\`\`\n\n---\n\n${visualChecklist}\n`;
+const visualChecklist = fs.existsSync(visualChecklistPath) ? fs.readFileSync(visualChecklistPath, 'utf8').trimEnd() : '';
+const guideRelative = path.relative(repoRoot, guideRoot) || '.';
+function shellQuote(value) {
+  if (value === '') return "''";
+  return `'${value.replaceAll("'", "'\\''")}'`;
+}
+const packet = `${prompt}\n\n---\n\n## Files to Review\n\n${files.map((file) => `- ${path.join(guideRelative, file)}`).join('\n')}\n\n## Recommended Commands\n\n\`\`\`bash\nnode ${shellQuote('templates/validators/validate-all.mjs')} ${shellQuote(guideRelative)} --no-write\nnode ${shellQuote(path.join(guideRelative, 'scripts/validate-all.mjs'))} ${shellQuote(guideRelative)} --no-write\n\`\`\`\n\n---\n\n${visualChecklist}\n`;
 fs.writeFileSync(path.join(reviewDir, 'review-packet.md'), packet);
 console.log(`Wrote ${path.join(reviewDir, 'review-packet.md')}`);

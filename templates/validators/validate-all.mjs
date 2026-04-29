@@ -6,6 +6,7 @@ import { spawnSync } from 'node:child_process';
 
 const guideRoot = path.resolve(process.argv[2] || process.cwd());
 const here = path.dirname(fileURLToPath(import.meta.url));
+const noWrite = process.argv.includes('--no-write') || process.argv.includes('--read-only');
 const validators = [
   'validate-guide.mjs',
   'validate-tailwind-export.mjs',
@@ -33,7 +34,9 @@ function updateManifest(status) {
 }
 
 for (const validator of validators) {
-  const result = spawnSync(process.execPath, [path.join(here, validator), guideRoot], {
+  const validatorArgs = [path.join(here, validator), guideRoot];
+  if (noWrite) validatorArgs.push('--no-write');
+  const result = spawnSync(process.execPath, validatorArgs, {
     encoding: 'utf8',
     stdio: 'pipe'
   });
@@ -45,10 +48,10 @@ for (const validator of validators) {
 }
 
 if (failures.length) {
-  updateManifest('failed');
+  if (!noWrite) updateManifest('failed');
   console.error(`Validation failed: ${failures.join(', ')}`);
   process.exit(1);
 }
 
-updateManifest('passed');
+if (!noWrite) updateManifest('passed');
 console.log(`All validations passed for ${guideRoot}`);

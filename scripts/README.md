@@ -6,9 +6,10 @@ Reusable scripts for creating and validating generated design guides.
 
 ```bash
 node scripts/create-guide.mjs "Product Name" --examples
+node scripts/create-guide.mjs "Styleguide" --target docs/styleguide
 ```
 
-Creates `examples/product-name-design-guide/`, copies blueprint chapters, copies validator templates, creates demo/tailwind folders, and writes an initial manifest. Use `--force` to refresh support files; add `--overwrite-chapters` only when replacing markdown chapters is intended.
+Creates a guide directory, copies blueprint chapters, copies validator templates, creates demo/tailwind folders, and writes an initial manifest. Use `--target` to write to an exact directory such as `docs/styleguide`; use `--out` to write under a parent directory with the generated slug. Use `--force` to refresh support files; add `--overwrite-chapters` only when replacing markdown chapters is intended.
 
 ## Merge appendices
 

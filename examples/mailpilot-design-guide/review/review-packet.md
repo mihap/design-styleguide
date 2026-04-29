@@ -31,7 +31,7 @@ You are an independent reviewer. You did not author the guide. Review the genera
 8. Confirm demo is deterministic, schema-driven, sidebar-navigable, and backed by the validated Tailwind export.
 9. Confirm color pairs used for content on fills meet at least 3:1 contrast, and body-like text pairs meet WCAG AA where applicable.
 10. Run the demo visual review checklist from `templates/review/demo-visual-review.md` when browser access is available.
-11. Run the validators and report exact commands and results.
+11. Run the validators in no-write mode and report exact commands and results.
 
 ## Output Format
 
@@ -69,8 +69,8 @@ Do not invent missing design decisions. If a production decision is missing, fla
 ## Recommended Commands
 
 ```bash
-node templates/validators/validate-all.mjs examples/mailpilot-design-guide
-node examples/mailpilot-design-guide/scripts/validate-all.mjs examples/mailpilot-design-guide
+node 'templates/validators/validate-all.mjs' 'examples/mailpilot-design-guide' --no-write
+node 'examples/mailpilot-design-guide/scripts/validate-all.mjs' 'examples/mailpilot-design-guide' --no-write
 ```
 
 ---

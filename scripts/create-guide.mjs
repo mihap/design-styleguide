@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const repoRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
+const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
 
 function usage() {
-  console.log(`Usage: node scripts/create-guide.mjs <name> [--out <dir>] [--examples] [--force] [--overwrite-chapters] [--overwrite-manifest]\n\nCreates a new {name}-design-guide directory from design-system-blueprint and copies reusable validator/demo templates. --force refreshes support files; --overwrite-chapters replaces markdown chapters; --overwrite-manifest replaces manifest.json.`);
+  console.log(`Usage: node scripts/create-guide.mjs <name> [--target <dir> | --out <parent-dir>] [--examples] [--force] [--overwrite-chapters] [--overwrite-manifest]\n\nCreates a new design guide directory from design-system-blueprint and copies reusable validator/demo templates. --target writes to the exact directory (for example docs/styleguide). --out writes under a parent directory using the generated slug. --force refreshes support files; --overwrite-chapters replaces markdown chapters; --overwrite-manifest replaces manifest.json.`);
 }
 
 function readArg(flag) {
@@ -31,6 +32,7 @@ const overwriteChapters = args.includes('--overwrite-chapters');
 const overwriteManifest = args.includes('--overwrite-manifest');
 const useExamples = args.includes('--examples');
 const outArg = readArg('--out') || readArg('-o');
+const targetArg = readArg('--target') || readArg('-t');
 
 function slugify(value) {
   return value
@@ -43,9 +45,9 @@ function slugify(value) {
 }
 
 const baseSlug = slugify(name);
-const slug = baseSlug.endsWith('design-guide') ? baseSlug : `${baseSlug}-design-guide`;
+const slug = targetArg ? slugify(path.basename(path.resolve(targetArg))) || baseSlug : baseSlug.endsWith('design-guide') ? baseSlug : `${baseSlug}-design-guide`;
 const parent = outArg ? path.resolve(outArg) : useExamples ? path.join(repoRoot, 'examples') : process.cwd();
-const target = path.join(parent, slug);
+const target = targetArg ? path.resolve(targetArg) : path.join(parent, slug);
 
 function copyDir(source, destination) {
   fs.mkdirSync(destination, { recursive: true });

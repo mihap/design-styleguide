@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const guideRoot = path.resolve(process.argv[2] || process.cwd());
-const here = path.dirname(new URL(import.meta.url).pathname);
+const here = path.dirname(fileURLToPath(import.meta.url));
 const demoRoot = path.join(guideRoot, 'demo');
 const data = JSON.parse(fs.readFileSync(path.join(demoRoot, 'demo-data.json'), 'utf8'));
 

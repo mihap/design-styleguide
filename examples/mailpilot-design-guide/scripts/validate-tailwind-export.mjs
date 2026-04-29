@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 const guideRoot = path.resolve(process.argv[2] || process.cwd());
+const noWrite = process.argv.includes('--no-write') || process.argv.includes('--read-only');
 const tailwindRoot = path.join(guideRoot, 'tailwind');
 const errors = [];
 const frameworkPattern = new RegExp(['Daisy' + 'UI', 'Material ' + 'UI', 'Bootstrap', 'Radix', 'Chakra', 'Mantine'].join('|'), 'i');
@@ -220,31 +222,36 @@ for (const file of required.filter((file) => fs.existsSync(path.join(tailwindRoo
 }
 
 const inputCss = path.join(tailwindRoot, 'src/input.css');
-const outputCss = path.join(tailwindRoot, 'dist/validator.css');
-if (!errors.length && fs.existsSync(inputCss)) {
-  fs.mkdirSync(path.dirname(outputCss), { recursive: true });
-  const result = spawnSync('npx', ['tailwindcss', '-i', inputCss, '-o', outputCss], {
-    cwd: tailwindRoot,
-    encoding: 'utf8',
-    stdio: 'pipe'
-  });
-  if (result.status !== 0) {
-    errors.push(`Tailwind build failed: ${result.stderr || result.stdout}`.trim());
-  } else if (!fs.existsSync(outputCss) || fs.statSync(outputCss).size === 0) {
-    errors.push('Tailwind build produced empty CSS output');
-  } else {
-    const css = fs.readFileSync(outputCss, 'utf8');
-    const sourceFiles = [path.join(tailwindRoot, 'src/fixture.html'), path.join(guideRoot, 'demo/index.html')].filter((file) => fs.existsSync(file));
-    const classes = new Set();
-    for (const file of sourceFiles) {
-      for (const className of extractClasses(fs.readFileSync(file, 'utf8'))) classes.add(className);
-    }
-    for (const className of classes) {
-      if (className.includes('[') || className.includes(']')) errors.push(`Class ${className} uses arbitrary bracket syntax; prefer deterministic theme tokens`);
-      const selector = `.${escapeSelectorClass(className)}`;
-      if (!css.includes(selector)) errors.push(`Tailwind did not emit utility selector for class: ${className}`);
+const tempOutputDir = noWrite ? fs.mkdtempSync(path.join(os.tmpdir(), 'pif-validator-')) : null;
+const outputCss = tempOutputDir ? path.join(tempOutputDir, 'validator.css') : path.join(tailwindRoot, 'dist/validator.css');
+try {
+  if (!errors.length && fs.existsSync(inputCss)) {
+    fs.mkdirSync(path.dirname(outputCss), { recursive: true });
+    const result = spawnSync('npx', ['tailwindcss', '-i', inputCss, '-o', outputCss], {
+      cwd: tailwindRoot,
+      encoding: 'utf8',
+      stdio: 'pipe'
+    });
+    if (result.status !== 0) {
+      errors.push(`Tailwind build failed: ${result.stderr || result.stdout}`.trim());
+    } else if (!fs.existsSync(outputCss) || fs.statSync(outputCss).size === 0) {
+      errors.push('Tailwind build produced empty CSS output');
+    } else {
+      const css = fs.readFileSync(outputCss, 'utf8');
+      const sourceFiles = [path.join(tailwindRoot, 'src/fixture.html'), path.join(guideRoot, 'demo/index.html')].filter((file) => fs.existsSync(file));
+      const classes = new Set();
+      for (const file of sourceFiles) {
+        for (const className of extractClasses(fs.readFileSync(file, 'utf8'))) classes.add(className);
+      }
+      for (const className of classes) {
+        if (className.includes('[') || className.includes(']')) errors.push(`Class ${className} uses arbitrary bracket syntax; prefer deterministic theme tokens`);
+        const selector = `.${escapeSelectorClass(className)}`;
+        if (!css.includes(selector)) errors.push(`Tailwind did not emit utility selector for class: ${className}`);
+      }
     }
   }
+} finally {
+  if (tempOutputDir) fs.rmSync(tempOutputDir, { recursive: true, force: true });
 }
 
 if (errors.length) {
